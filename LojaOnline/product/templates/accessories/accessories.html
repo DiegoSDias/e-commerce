@@ -3,108 +3,154 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TechPhone - Acessórios para Celular</title>
+    <title>Lançamentos - Celulares e Acessórios</title>
   
     {% load static %}
-    <link rel="stylesheet" href="{% static "css/accessories.css" %}">
+    <link rel="stylesheet" href="{% static "css/launch.css" %}">
 </head>
 <body>
    
     {% include "header/header.html" %}
 
-    <div class="container">
-        <p class="subtitle">Os melhores acessórios para o seu celular com preços incríveis!</p>
+        <div class="filters">
+            <button class="filter_btn active" data-filter="todos">Todos</button>
+            <button class="filter_btn" data-filter="celulares">Celulares</button>
+            <button class="filter_btn" data-filter="acessorios">Acessórios</button>
+        </div>
 
-        <!-- Capas e Películas -->
-        <div class="category_section">
-            <h2 class="category_title">🛡️ Capas e Películas</h2>
-            <div class="products_grid">
-                <div class="product_card">
-                    <div class="product_image">📱</div>
-                    <div class="product_name">Capa Silicone Premium</div>
-                    <div class="product_description">Capa de silicone macia, proteção total contra quedas e arranhões. Disponível em várias cores.</div>
-                    <div class="product_price">R$ 19,90</div>
-                    <button class="btn" onclick="comprar('Capa Silicone Premium', '19,90')">Comprar Agora</button>
-                    <button class="btn btn-whatsapp" onclick="whatsapp('Capa Silicone Premium', '19,90')">💬 WhatsApp</button>
+        <div class="products_grid" id="productsGrid">
+            <!-- Celulares -->
+            <div class="product_card category_celular" data-category="celulares">
+                <div class="product_image">📱</div>
+                <div class="new_badge">NOVO</div>
+                <div class="product_info">
+                    <div class="brand">Samsung</div>
+                    <h3 class="product_name">Galaxy S24 Ultra</h3>
+                    <p class="product_description">Tela Dynamic AMOLED 6.8", câmera 200MP, S Pen integrada</p>
+                    <div class="price_section">
+                        <div>
+                            <span class="price">R$ 6.999</span>
+                        </div>
+                    </div>
+                    <button class="buy_btn">Comprar Agora</button>
                 </div>
+            </div>
 
-                <div class="product_card">
-                    <div class="product_image">🔒</div>
-                    <div class="product_name">Película de Vidro 9H</div>
-                    <div class="product_description">Película de vidro temperado 9H, proteção total da tela com toque sensível.</div>
-                    <div class="product_price">R$ 15,90</div>
-                    <button class="btn" onclick="comprar('Película de Vidro 9H', '15,90')">Comprar Agora</button>
-                    <button class="btn btn-whatsapp" onclick="whatsapp('Película de Vidro 9H', '15,90')">💬 WhatsApp</button>
+            <div class="product_card category_celular" data-category="celulares">
+                <div class="product_image">📱</div>
+                <div class="new_badge">NOVO</div>
+                <div class="product_info">
+                    <div class="brand">Apple</div>
+                    <h3 class="product_name">iPhone 15 Pro Max</h3>
+                    <p class="product_description">Chip A17 Pro, câmera 48MP, titânio, USB-C</p>
+                    <div class="price_section">
+                        <div>
+                            <span class="price">R$ 9.499</span>
+                        </div>
+                    </div>
+                    <button class="buy_btn">Comprar Agora</button>
                 </div>
+            </div>
 
-                <div class="product_card">
-                    <div class="product_image">🛡️</div>
-                    <div class="product_name">Capa Anti-Impacto</div>
-                    <div class="product_description">Capa militar anti-impacto com suporte, máxima proteção para uso profissional.</div>
-                    <div class="product_price">R$ 29,90</div>
-                    <button class="btn" onclick="comprar('Capa Anti-Impacto', '29,90')">Comprar Agora</button>
-                    <button class="btn btn-whatsapp" onclick="whatsapp('Capa Anti-Impacto', '29,90')">💬 WhatsApp</button>
+            <div class="product_card category_celular" data-category="celulares">
+                <div class="product_image">📱</div>
+                <div class="new_badge">NOVO</div>
+                <div class="product_info">
+                    <div class="brand">Xiaomi</div>
+                    <h3 class="product_name">Mi 14 Ultra</h3>
+                    <p class="product_description">Snapdragon 8 Gen 3, câmera Leica 50MP, carregamento 90W</p>
+                    <div class="price_section">
+                        <div>
+                            <span class="price">R$ 4.799</span>
+                        </div>
+                    </div>
+                    <button class="buy_btn">Comprar Agora</button>
+                </div>
+            </div>
+
+            <div class="product_card category_celular" data-category="celulares">
+                <div class="product_image">📱</div>
+                <div class="new_badge">NOVO</div>
+                <div class="product_info">
+                    <div class="brand">Google</div>
+                    <h3 class="product_name">Pixel 8 Pro</h3>
+                    <p class="product_description">Tensor G3, IA avançada, câmera computacional 50MP</p>
+                    <div class="price_section">
+                        <div>
+                            <span class="price">R$ 5.499</span>
+                        </div>
+                    </div>
+                    <button class="buy_btn">Comprar Agora</button>
+                </div>
+            </div>
+
+            <!-- Acessórios -->
+            <div class="product_card category_acessorio" data-category="acessorios">
+                <div class="product_image">🎧</div>
+                <div class="new_badge">NOVO</div>
+                <div class="product_info">
+                    <div class="brand">Sony</div>
+                    <h3 class="product_name">WH-1000XM5</h3>
+                    <p class="product_description">Cancelamento de ruído líder, 30h bateria, áudio Hi-Res</p>
+                    <div class="price_section">
+                        <div>
+                            <span class="price">R$ 1.899</span>
+                        </div>
+                    </div>
+                    <button class="buy_btn">Comprar Agora</button>
+                </div>
+            </div>
+
+            <div class="product_card category_acessorio" data-category="acessorios">
+                <div class="product_image">⚡</div>
+                <div class="new_badge">NOVO</div>
+                <div class="product_info">
+                    <div class="brand">Anker</div>
+                    <h3 class="product_name">PowerBank 25.600mAh</h3>
+                    <p class="product_description">Carregamento rápido 100W, 3 portas, display LED</p>
+                    <div class="price_section">
+                        <div>
+                            <span class="price">R$ 299</span>
+                        </div>
+                    </div>
+                    <button class="buy_btn">Comprar Agora</button>
+                </div>
+            </div>
+
+            <div class="product_card category_acessorio" data-category="acessorios">
+                <div class="product_image">📸</div>
+                <div class="new_badge">NOVO</div>
+                <div class="product_info">
+                    <div class="brand">DJI</div>
+                    <h3 class="product_name">OM 6 Gimbal</h3>
+                    <p class="product_description">Estabilizador 3 eixos, ActiveTrack 6.0, bateria 6.4h</p>
+                    <div class="price_section">
+                        <div>
+                            <span class="price">R$ 899</span>
+                        </div>
+                    </div>
+                    <button class="buy_btn">Comprar Agora</button>
+                </div>
+            </div>
+
+            <div class="product_card category_acessorio" data-category="acessorios">
+                <div class="product_image">⌚</div>
+                <div class="new_badge">NOVO</div>
+                <div class="product_info">
+                    <div class="brand">Samsung</div>
+                    <h3 class="product_name">Galaxy Watch 6 Classic</h3>
+                    <p class="product_description">Tela Super AMOLED, GPS, monitoramento saúde 24/7</p>
+                    <div class="price_section">
+                        <div>
+                            <span class="price">R$ 1.699</span>
+                        </div>
+                    </div>
+                    <button class="buy_btn">Comprar Agora</button>
                 </div>
             </div>
         </div>
+    </div>
 
-        <!-- Carregadores -->
-        <div class="category_section">
-            <h2 class="category_title">🔌 Carregadores</h2>
-            <div class="products_grid">
-                <div class="product_card">
-                    <div class="product_image">⚡</div>
-                    <div class="product_name">Carregador Turbo 33W</div>
-                    <div class="product_description">Carregamento rápido 33W, carrega seu celular em 30 minutos. Compatível com todas as marcas.</div>
-                    <div class="product_price">R$ 29,90</div>
-                    <button class="btn" onclick="comprar('Carregador Turbo 33W', '29,90')">Comprar Agora</button>
-                    <button class="btn btn-whatsapp" onclick="whatsapp('Carregador Turbo 33W', '29,90')">💬 WhatsApp</button>
-                </div>
-
-                <div class="product_card">
-                    <div class="product_image">🔋</div>
-                    <div class="product_name">Power Bank 10000mAh</div>
-                    <div class="product_description">Bateria portátil de 10000mAh, carrega até 3 dispositivos simultaneamente.</div>
-                    <div class="product_price">R$ 45,90</div>
-                    <button class="btn" onclick="comprar('Power Bank 10000mAh', '45,90')">Comprar Agora</button>
-                    <button class="btn btn-whatsapp" onclick="whatsapp('Power Bank 10000mAh', '45,90')">💬 WhatsApp</button>
-                </div>
-
-                <div class="product_card">
-                    <div class="product_image">📱</div>
-                    <div class="product_name">Carregador Sem Fio</div>
-                    <div class="product_description">Base de carregamento wireless 15W, compatível com iPhone e Android.</div>
-                    <div class="product_price">R$ 35,90</div>
-                    <button class="btn" onclick="comprar('Carregador Sem Fio', '35,90')">Comprar Agora</button>
-                    <button class="btn btn-whatsapp" onclick="whatsapp('Carregador Sem Fio', '35,90')">💬 WhatsApp</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Fones de Ouvido -->
-        <div class="category_section">
-            <h2 class="category_title">🎧 Fones de Ouvido</h2>
-            <div class="products_grid">
-                <div class="product_card">
-                    <div class="product_image">🎵</div>
-                    <div class="product_name">Fone Bluetooth Premium</div>
-                    <div class="product_description">Fone Bluetooth 5.0 com cancelamento de ruído, 8 horas de bateria.</div>
-                    <div class="product_price">R$ 59,90</div>
-                    <button class="btn" onclick="comprar('Fone Bluetooth Premium', '59,90')">Comprar Agora</button>
-                    <button class="btn btn-whatsapp" onclick="whatsapp('Fone Bluetooth Premium', '59,90')">💬 WhatsApp</button>
-                </div>
-
-                <div class="product_card">
-                    <div class="product_image">🎧</div>
-                    <div class="product_name">Earbuds Sport</div>
-                    <div class="product_description">Earbuds resistentes à água, ideais para exercícios, som de alta qualidade.</div>
-                    <div class="product_price">R$ 39,90</div>
-                    <button class="btn" onclick="comprar('Earbuds Sport', '39,90')">Comprar Agora</button>
-                    <button class="btn btn-whatsapp" onclick="whatsapp('Earbuds Sport', '39,90')">💬 WhatsApp</button>
-                </div>
-            </div>
-        </div>
-
-    <script src="{% static "js/accessories.html" %}"></script>
+    <script src="{% static "js/launch.js" %}"></script>
 </body>
 </html>
