@@ -1,64 +1,71 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login & Cadastro</title>
- 
-    {% load static %}
-    <link rel="stylesheet" href="{% static "css/login_register.css" %}">
-</head>
-<body>
-    <div class="container">
-        <div class="form_container">
-            <div class="form" id="loginForm">
-                <h2>Entrar</h2>
-                <div class="success_message" id="successMessage"></div>
-                <form onsubmit="handleLogin(event)">
-                    <div class="input_group">
-                        <input type="email" placeholder="E-mail" required>
-                    </div>
-                    <div class="input_group">
-                        <input type="password" placeholder="Senha" required>
-                    </div>
-                    <a type="submit" class="btn" onclick="loginUsuario()">Entrar</a>
-                </form>
-                <div class="forgot_password">
-                    <a href="#" onclick="showForgotPassword()">Esqueceu a senha?</a>
-                </div>
-                <div class="toggle_text">
-                    Não tem uma conta? <span class="toggle_link" onclick="showSignup()">Cadastre-se</span>
-                </div>
-            </div>
 
-            <div class="form hidden" id="signupForm">
-                <h2>Cadastrar</h2>
-                <div class="success_message" id="signupSuccessMessage"></div>
-                <form onsubmit="handleSignup(event)">
-                    <div class="input_group">
-                        <input type="text" placeholder="Nome completo" required>
-                    </div>
-                    <div class="input_group">
-                        <input type="email" placeholder="E-mail" required>
-                    </div>
-                    <div class="input_group">
-                        <input type="password" placeholder="Senha" required minlength="6">
-                    </div>
-                    <div class="input_group">
-                        <input type="password" placeholder="Confirmar senha" required minlength="6">
-                    </div>
-                    <button type="submit" class="btn">Cadastrar</button>
-                </form>
-                <div class="toggle_text">
-                    Já tem uma conta? <span class="toggle_link" onclick="showLogin()">Faça login</span>
-                </div>
+    {% load static %} <link rel="stylesheet" href="{% static "css/login_register.css" %}">
+  </head>
+  <body>
+
+    <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+
+    <div class="container">
+      <div class="form_container">
+        <div class="form" id="loginForm">
+          <h2>Entrar</h2>
+          <div class="success_message" id="successMessage"></div>
+          <form id="login_form">
+            <div class="input_group">
+              <input type="email" id="emailLogin" placeholder="E-mail" required />
             </div>
+            <div class="input_group">
+              <input type="password" id="senhaLogin" placeholder="Senha" required />
+            </div>
+            <button type="submit" class="btn">Entrar</button>
+          </form>
+          <div class="forgot_password">
+            <a href="#" onclick="showForgotPassword()">Esqueceu a senha?</a>
+          </div>
+          <div class="toggle_text">Não tem uma conta? <span class="toggle_link" onclick="showSignup()">Cadastre-se</span></div>
         </div>
+
+        <div class="form hidden" id="signupForm">
+          <h2>Cadastrar</h2>
+          <div class="success_message" id="signupSuccessMessage"></div>
+          <form id="cadastro_form">
+            <div class="input_group">
+              <input type="text" name="nome" id="nome" placeholder="Nome completo" required />
+            </div>
+            <div class="input_group">
+              <input type="text" name="cpf" id="cpf" placeholder="CPF (somente números)" maxlength="11" required />
+            </div>
+            <div class="input_group">
+              <input type="email" name="email" id="email" placeholder="E-mail" required />
+            </div>
+            <div class="input_group">
+              <input type="tel" name="telefone" id="telefone" placeholder="Telefone" maxlength="11" required />
+            </div>
+            <div class="input_group">
+              <input type="date" name="data_nascimento" id="data_nascimento" required />
+            </div>
+            <div class="input_group">
+              <input type="password" name="senha" id="senha" placeholder="Senha" required minlength="6" />
+            </div>
+            <div class="input_group">
+              <input type="password" name="confirmar_senha" id="confirmar_senha" placeholder="Confirmar senha" required minlength="6" />
+            </div>
+            <button type="submit" class="btn">Cadastrar</button>
+          </form>
+          <div class="toggle_text">Já tem uma conta? <span class="toggle_link" onclick="showLogin()">Faça login</span></div>
+        </div>
+      </div>
     </div>
 
-    <script src="{% static "js/login_register.js" %}"></script>
     <script>
-        const menu = "{% url 'menu' %}"
+      const menu = "{% url 'menu' %}";
     </script>
-</body>
+    <script src="{% static 'js/login_register.js' %}"></script>
+  </body>
 </html>

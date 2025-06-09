@@ -23,6 +23,7 @@ document.addEventListener("DOMContentLoaded", function () {
     alert("Funcionalidade do carrinho aqui");
   });
 
+  /*
     const options_menu = document.querySelectorAll(".option_menu a");
   options_menu.forEach((option) => {
     option.addEventListener("click", function (e) {
@@ -32,5 +33,5 @@ document.addEventListener("DOMContentLoaded", function () {
         alert(`Navegando para: ${option_chosen}`);
       }
     });
-  });
+  });*/
 });

@@ -82,21 +82,16 @@
                     <li>
                         <a href="{% url "launch" %}">Lançamentos</a>
                     </li>
-                    <!--
+                     {% if is_superuser %}
                     <li>
-                        <a href="#suporte">Suporte</a>
-                        <ul class="dropdown">
-                            <li><a href="#garantia">🛡️ Garantia</a></li>
-                            <li><a href="#troca">🔄 Trocas</a></li>
-                            <li><a href="#assistencia">🔧 Assistência</a></li>
-                            <li><a href="#contato">📞 Contato</a></li>
-                        </ul>
+                        <a href="{% url 'add_product' %}">Adicionar Produto</a>
                     </li>
-                    -->
+                    {% endif %}
                 </ul>
             </div>
         </nav>
     </header>
+    
 
-    <scrip src="js/header.js"></script>
+    <script src="{% static 'js/header.js' %}"></script>
 </body>

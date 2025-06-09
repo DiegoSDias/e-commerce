@@ -146,6 +146,23 @@ nav {
   padding: 0;
 }
 
+a {
+  cursor: pointer;
+}
+
+#formProduto {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh; /* ocupa a tela toda */
+  background-color: rgba(0, 0, 0, 0.5);
+  justify-content: center; /* centraliza horizontal */
+  align-items: center; /* centraliza vertical */
+  z-index: 1000;
+  display: none;
+}
+
 .option_menu {
   display: flex;
   list-style: none;

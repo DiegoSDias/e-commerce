@@ -1,4 +1,8 @@
- function showLogin() {
+function getCSRFToken() {
+  return document.querySelector("[name=csrfmiddlewaretoken]").value;
+}
+
+function showLogin() {
             document.getElementById('loginForm').classList.remove('hidden');
             document.getElementById('signupForm').classList.add('hidden');
         }
@@ -12,19 +16,6 @@ function showForgotPassword() {
     alert('Funcionalidade de recuperação de senha ainda não implementada.\nEm um sistema real, isso redirecionaria para a página de recuperação.');
 }
 
-function handleSignup(event) {  
-    setTimeout(() => {
-    const successMsg = document.getElementById('signupSuccessMessage');
-    successMsg.innerHTML = `✅ Cadastro realizado com sucesso!<br>Bem-vindo, ${name}!`;
-    successMsg.style.display = 'block';
-                
-    setTimeout(() => {
-        successMsg.style.display = 'none';
-        showLogin();
-        }, 2000);
-    }, 500);
-}
-
 document.addEventListener('keydown', function(event) {
     if (event.key === 'Enter') {
         const activeForm = document.querySelector('.form:not(.hidden)');
@@ -33,52 +24,86 @@ document.addEventListener('keydown', function(event) {
     }
 });
 
-async function loginUsuario() {
+window.onload = () => {
 
-    const dados = {
-        email: document.getElementById("email").value,
-        senha: document.getElementById("senha").value
+    const formLogin = document.getElementById("login_form");
+    console.log(formLogin)
+    if (formLogin) {
+        let teste = false;
+        formLogin.addEventListener("submit", async function (event) {
+            event.preventDefault();
+            console.log("TESTE: ", teste)
+            if(teste) return 
+            teste = true;
+            
+            const dados = {
+                email: document.getElementById("emailLogin").value,
+                senha: document.getElementById("senhaLogin").value
+            }
+
+            const response = await fetch("/login_register/login/", {
+            method: "POST",
+            headers: {"Content-Type": "application/json",
+                "X-CSRFToken": getCSRFToken()
+            },
+            body: JSON.stringify(dados)
+            })
+
+            const data = await response.json()
+            console.log("DATA: ", data)
+            if(data){
+                window.location.href = menu
+            }
+            else {
+                alert("Erro ao fazer login")
+            }
+        submitted = false;
+        })
     }
     
-    const response = await fetch("login/", {
-        method: "POST",
-        headers: {"Content-Type": "application/json",
-            //"X-CSRFToken": getCSRFToken()
-        },
-        body: JSON.stringify(dados)
-    })
+    const form = document.getElementById("cadastro_form");
+    if (form) {
+        let submitted = false;
+        form.addEventListener("submit", async function (event) {
+            event.preventDefault(); 
 
-    const data = await response.json()
+        if (submitted) return;
+        submitted = true;
 
-    if(data){
-        window.location.href = menu
+            const dados = {
+                nome: document.getElementById("nome").value,
+                cpf: document.getElementById("cpf").value,
+                email: document.getElementById("email").value,
+                telefone: document.getElementById("telefone").value,
+                data_nascimento: document.getElementById("data_nascimento").value,
+                senha: document.getElementById("senha").value,
+            };
+            let confirmar_senha = document.getElementById("confirmar_senha").value;
+
+            if (dados.senha !== confirmar_senha) {
+                alert("As senhas não coincidem!");
+                return;
+            }
+
+            const response = await fetch("/login_register/register/", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRFToken": getCSRFToken()
+                },
+                body: JSON.stringify(dados)
+            });
+
+            const data = await response.json();
+
+            if (data.sucesso) {
+                window.location.href = menu
+            } else {
+                alert(data.erro || "Erro ao cadastrar.");
+            }
+        });
+    submitted = false;
     }
-}
-
-async function validarCadastro() {
     
-    const dados = {
-        nome: document.getElementById("nome").value,
-        email: document.getElementById("email").value,
-        senha: document.getElementById("senha").value,
-        confirmarSenha: document.getElementById("confirmar_senha").value,
-    }
+};
 
-    if(dados.senha != dados.confirmarSenha){
-
-    }
-
-    const response = await fetch("register/", {
-        method: "POST",
-        headers: {"Content-Type": "application/json", 
-            //X-CSRFToken
-        },
-        body: JSON.stringify(dados)
-    })
-
-    const data = await response.json()
-   
-    if(data){
-        showLogin()
-    }
-}
