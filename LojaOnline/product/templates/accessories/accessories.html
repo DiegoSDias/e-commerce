@@ -6,16 +6,13 @@
     <title>Acessórios - Para customizar</title>
   
     {% load static %}
-    <link rel="stylesheet" href="{% static "css/launch.css" %}">
+    <link rel="stylesheet" href="{% static "css/accessories.css" %}">
 </head>
 <body>
    
     {% include "header/header.html" %}
 
         <div class="filters">
-            <button class="filter_btn active" data-filter="todos">Todos</button>
-            <button class="filter_btn" data-filter="celulares">Celulares</button>
-            <button class="filter_btn" data-filter="acessorios">Acessórios</button>
         </div>
 
         <div class="products_grid" id="productsGrid">
@@ -151,6 +148,6 @@
         </div>
     </div>
 
-    <script src="{% static "js/launch.js" %}"></script>
+    <script src="{% static "js/accessories.js" %}"></script>
 </body>
 </html>
