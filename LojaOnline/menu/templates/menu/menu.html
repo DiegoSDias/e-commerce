@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MobileWorld - Sua Loja de Celulares</title>
+    <title>Mundo Tech - Sua Loja de Celulares</title>
  
     {% load static %}
     <link rel="stylesheet" href="{% static "css/menu.css" %}">
@@ -17,108 +17,6 @@
             <h1>Últimos Lançamentos</h1>
             <p>Descubra os smartphones mais avançados com os melhores preços do mercado</p>
             <a href="#produtos" class="see_product">Ver Produtos</a>
-        </div>
-    </section>
-
-    <section class="brands">
-        <div class="container">
-            <h2 class="section_title">Principais Marcas</h2>
-            <div class="brands_grid">
-                <a href="{% url 'smartphones_marca' 'apple' %}" class="brand_card">
-                    <div class="brand_image brand_apple">🍎</div>
-                    <div class="brand_info">
-                        <h3>Apple</h3>
-                        <p>iPhone com tecnologia premium</p>
-                    </div>
-                </a>
-                
-                <a href="{% url "smartphones_marca" "samsung" %}" class="brand_card">
-                    <div class="brand_image brand_samsung">📱</div>
-                    <div class="brand_info">
-                        <h3>Samsung</h3>
-                        <p>Galaxy com inovação e qualidade</p>
-                    </div>
-                </a>
-                
-                <a href="{% url "smartphones_marca" "xiaomi" %}" class="brand_card">
-                    <div class="brand_image brand_xiaomi">🔥</div>
-                    <div class="brand_info">
-                        <h3>Xiaomi</h3>
-                        <p>Melhor custo-benefício</p>
-                    </div>
-                </a>
-                
-                <a href="{% url "smartphones_marca" "motorola" %}" class="brand_card">
-                    <div class="brand_image brand_motorola">⚡</div>
-                    <div class="brand_info">
-                        <h3>Motorola</h3>
-                        <p>Tradição e confiabilidade</p>
-                    </div>
-                </a>
-                
-                <a href="{% url "smartphones_marca" "lg" %}" class="brand_card">
-                    <div class="brand_image brand_lg">📺</div>
-                    <div class="brand_info">
-                        <h3>LG</h3>
-                        <p>Tecnologia e design</p>
-                    </div>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <section class="categories">
-        <div class="container">
-            <h2 class="section_title">Categorias em Destaque</h2>
-            <div class="categories_grid">
-                <a href="{% url "smartphones_categoria" "premium" %}" class="category_card">
-                    <div class="category_image">
-                        💎
-                        <div class="category_name">Premium</div>
-                    </div>
-                    <div class="category_info">
-                        <h3>Smartphones Premium</h3>
-                        <p>Os mais avançados do mercado com tecnologia de ponta</p>
-                        <div class="category_price">A partir de R$ 2.999</div>
-                    </div>
-                </a>
-                
-                <a href="{% url "smartphones_categoria" "intermediario" %}" class="category_card">
-                    <div class="category_image">
-                        ⚡
-                        <div class="category_name">Popular</div>
-                    </div>
-                    <div class="category_info">
-                        <h3>Intermediários</h3>
-                        <p>Perfeito equilíbrio entre preço e performance</p>
-                        <div class="category_price">A partir de R$ 899</div>
-                    </div>
-                </a>
-                
-                <a href="{% url "smartphones_categoria" "acessorios" %}" class="category_card">
-                    <div class="category_image">
-                        🎧
-                        <div class="category_name">Novidade</div>
-                    </div>
-                    <div class="category_info">
-                        <h3>Acessórios</h3>
-                        <p>Capas, fones, carregadores e muito mais</p>
-                        <div class="category_price">A partir de R$ 29</div>
-                    </div>
-                </a>
-                
-                <a href="{% url "smartphones_categoria" "promocoes" %}" class="category_card">
-                    <div class="category_image">
-                        🔥
-                        <div class="category_name">Oferta</div>
-                    </div>
-                    <div class="category_info">
-                        <h3>Promoções</h3>
-                        <p>Descontos imperdíveis em smartphones selecionados</p>
-                        <div class="category_price">Até 50% OFF</div>
-                    </div>
-                </a>
-            </div>
         </div>
     </section>
 
