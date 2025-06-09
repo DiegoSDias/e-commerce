@@ -3,108 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TechPhone - Acessórios para Celular</title>
-  
+    <title>Marcas - As melhores opções</title>
+    
     {% load static %}
-    <link rel="stylesheet" href="{% static "css/accessories.css" %}">
+    <link rel="stylesheet" href="{% static "css/brand.css" %}">
 </head>
 <body>
    
     {% include "header/header.html" %}
 
-    <div class="container">
-        <p class="subtitle">Os melhores acessórios para o seu celular com preços incríveis!</p>
-
-        <!-- Capas e Películas -->
-        <div class="category_section">
-            <h2 class="category_title">🛡️ Capas e Películas</h2>
-            <div class="products_grid">
-                <div class="product_card">
-                    <div class="product_image">📱</div>
-                    <div class="product_name">Capa Silicone Premium</div>
-                    <div class="product_description">Capa de silicone macia, proteção total contra quedas e arranhões. Disponível em várias cores.</div>
-                    <div class="product_price">R$ 19,90</div>
-                    <button class="btn" onclick="comprar('Capa Silicone Premium', '19,90')">Comprar Agora</button>
-                    <button class="btn btn-whatsapp" onclick="whatsapp('Capa Silicone Premium', '19,90')">💬 WhatsApp</button>
+    <div class="products_section">
+        <div class="container">
+            <!-- Apple -->
+            <div class="brand_section" data-brand="apple">
+                <div class="brand_header apple_header">
+                    <div class="brand_logo"></div>
+                    <div class="brand_title">Acessórios</div>
                 </div>
-
-                <div class="product_card">
-                    <div class="product_image">🔒</div>
-                    <div class="product_name">Película de Vidro 9H</div>
-                    <div class="product_description">Película de vidro temperado 9H, proteção total da tela com toque sensível.</div>
-                    <div class="product_price">R$ 15,90</div>
-                    <button class="btn" onclick="comprar('Película de Vidro 9H', '15,90')">Comprar Agora</button>
-                    <button class="btn btn-whatsapp" onclick="whatsapp('Película de Vidro 9H', '15,90')">💬 WhatsApp</button>
-                </div>
-
-                <div class="product_card">
-                    <div class="product_image">🛡️</div>
-                    <div class="product_name">Capa Anti-Impacto</div>
-                    <div class="product_description">Capa militar anti-impacto com suporte, máxima proteção para uso profissional.</div>
-                    <div class="product_price">R$ 29,90</div>
-                    <button class="btn" onclick="comprar('Capa Anti-Impacto', '29,90')">Comprar Agora</button>
-                    <button class="btn btn-whatsapp" onclick="whatsapp('Capa Anti-Impacto', '29,90')">💬 WhatsApp</button>
+                <div class="products_grid">
+                    <div class="product_card apple_card">
+                        <div class="product_image apple_image"></div>
+                        <h3 class="product_name">Película Cerâmica Privacidade</h3>
+                        <div class="product_specs">
+                            • Mais proteção<br>
+                            • Mais segurança<br>
+                            • Mais durabilidade<br>
+                            • Mais estilo<br>
+                        </div>
+                        <div class="product_price apple_price">R$ 39,90</div>
+                        <button class="buy_btn apple_btn" onclick="buyProduct('iPhone 15 Pro Max')">Comprar</button>
+                    </div>
                 </div>
             </div>
         </div>
+    </div>
 
-        <!-- Carregadores -->
-        <div class="category_section">
-            <h2 class="category_title">🔌 Carregadores</h2>
-            <div class="products_grid">
-                <div class="product_card">
-                    <div class="product_image">⚡</div>
-                    <div class="product_name">Carregador Turbo 33W</div>
-                    <div class="product_description">Carregamento rápido 33W, carrega seu celular em 30 minutos. Compatível com todas as marcas.</div>
-                    <div class="product_price">R$ 29,90</div>
-                    <button class="btn" onclick="comprar('Carregador Turbo 33W', '29,90')">Comprar Agora</button>
-                    <button class="btn btn-whatsapp" onclick="whatsapp('Carregador Turbo 33W', '29,90')">💬 WhatsApp</button>
-                </div>
-
-                <div class="product_card">
-                    <div class="product_image">🔋</div>
-                    <div class="product_name">Power Bank 10000mAh</div>
-                    <div class="product_description">Bateria portátil de 10000mAh, carrega até 3 dispositivos simultaneamente.</div>
-                    <div class="product_price">R$ 45,90</div>
-                    <button class="btn" onclick="comprar('Power Bank 10000mAh', '45,90')">Comprar Agora</button>
-                    <button class="btn btn-whatsapp" onclick="whatsapp('Power Bank 10000mAh', '45,90')">💬 WhatsApp</button>
-                </div>
-
-                <div class="product_card">
-                    <div class="product_image">📱</div>
-                    <div class="product_name">Carregador Sem Fio</div>
-                    <div class="product_description">Base de carregamento wireless 15W, compatível com iPhone e Android.</div>
-                    <div class="product_price">R$ 35,90</div>
-                    <button class="btn" onclick="comprar('Carregador Sem Fio', '35,90')">Comprar Agora</button>
-                    <button class="btn btn-whatsapp" onclick="whatsapp('Carregador Sem Fio', '35,90')">💬 WhatsApp</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Fones de Ouvido -->
-        <div class="category_section">
-            <h2 class="category_title">🎧 Fones de Ouvido</h2>
-            <div class="products_grid">
-                <div class="product_card">
-                    <div class="product_image">🎵</div>
-                    <div class="product_name">Fone Bluetooth Premium</div>
-                    <div class="product_description">Fone Bluetooth 5.0 com cancelamento de ruído, 8 horas de bateria.</div>
-                    <div class="product_price">R$ 59,90</div>
-                    <button class="btn" onclick="comprar('Fone Bluetooth Premium', '59,90')">Comprar Agora</button>
-                    <button class="btn btn-whatsapp" onclick="whatsapp('Fone Bluetooth Premium', '59,90')">💬 WhatsApp</button>
-                </div>
-
-                <div class="product_card">
-                    <div class="product_image">🎧</div>
-                    <div class="product_name">Earbuds Sport</div>
-                    <div class="product_description">Earbuds resistentes à água, ideais para exercícios, som de alta qualidade.</div>
-                    <div class="product_price">R$ 39,90</div>
-                    <button class="btn" onclick="comprar('Earbuds Sport', '39,90')">Comprar Agora</button>
-                    <button class="btn btn-whatsapp" onclick="whatsapp('Earbuds Sport', '39,90')">💬 WhatsApp</button>
-                </div>
-            </div>
-        </div>
-
-    <script src="{% static "js/accessories.html" %}"></script>
+    <script src="{% static "js/brand.js" %}"></script>
 </body>
 </html>
+        

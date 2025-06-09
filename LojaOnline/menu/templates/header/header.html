@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MobileWorld - Sua Loja de Celulares</title>
+    <title>Mundo Tech - Sua Loja de Celulares</title>
  
     {% load static %}
     <link rel="stylesheet" href="{% static "css/menu.css" %}">
@@ -14,11 +14,10 @@
             <div class="container">
                 <div class="sidebar_container">
                     <div class="info">
-                        <span>🚚 Frete Grátis acima de R$ 199</span>
+                        <span></span>
                     </div>
                     <div class="user_actions">
                         <a href="{% url "welcome" %}">Entrar ou Cadastrar</a>
-                        <a href="#wishlist">❤️ Favoritos</a>
                     </div>
                 </div>
             </div>
@@ -27,7 +26,7 @@
         <div class="container">
             <div class="main_header">
                 <a href="#" class="logo">
-                    📱 MobileWorld
+                    📱 Mundo Tech
                 </a>
                 
                 <div class="search_bar">
@@ -51,30 +50,10 @@
                         <a href="{% url "menu" %}">Início</a>
                     </li>
                     <li>
-                        <a href="{% url "smartphones" %}">Smartphones</a>
-                        <ul class="dropdown">
-                            <li><a href="{% url "smartphones_categoria" "premium" %}">💎 Premium</a></li>
-                            <li><a href="{% url "smartphones_categoria" "intermediario" %}">⚡ Intermediários</a></li>
-                            <li><a href="{% url "smartphones_categoria" "basicos" %}">🔋 Básicos</a></li>
-                        </ul>
-                    </li>
-                    <li>
                         <a href="{% url "brand" %}">Marcas</a>
-                        <ul class="dropdown">
-                            <li><a href="{% url 'smartphones_marca' 'apple' %}">🍎 Apple</a></li>
-                            <li><a href="{% url 'smartphones_marca' 'samsung' %}">📱 Samsung</a></li>
-                            <li><a href="{% url 'smartphones_marca' 'xiaomi' %}">🔥 Xiaomi</a></li>
-                            <li><a href="{% url 'smartphones_marca' 'motorola' %}">⚡ Motorola</a></li>
-                            <li><a href="{% url 'smartphones_marca' 'lg' %}">📺 LG</a></li>
-                        </ul>
                     </li>
                     <li>
                         <a href="{% url "accessories" %}">Acessórios</a>
-                        <ul class="dropdown">
-                            <li><a href="{% url 'smartphones_acessorio' 'capas' %}">🛡️ Capas e Películas</a></li>
-                            <li><a href="{% url 'smartphones_acessorio' 'carregadores' %}">🔌 Carregadores</a></li>
-                            <li><a href="{% url 'smartphones_acessorio' 'fones' %}">🎧 Fones de Ouvido</a></li>
-                        </ul>
                     </li>
                     <li>
                         <a href="{% url "promotion" %}">Promoções</a>

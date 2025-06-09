@@ -130,22 +130,6 @@ body {
   background: linear-gradient(135deg, #ff6900, #ff8533);
 }
 
-.motorola_header {
-  background: linear-gradient(135deg, #0066cc, #004499);
-  color: white;
-}
-.motorola_header::before {
-  background: linear-gradient(135deg, #0066cc, #004499);
-}
-
-.lg_header {
-  background: linear-gradient(135deg, #a50034, #d6336c);
-  color: white;
-}
-.lg_header::before {
-  background: linear-gradient(135deg, #a50034, #d6336c);
-}
-
 .brand_logo {
   font-size: 4em;
   font-weight: 900;
@@ -158,19 +142,21 @@ body {
 }
 
 .products_grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 30px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, auto));
+    gap: 20px;
+    justify-items: center;
+    align-items: start;
 }
 
 .product_card {
-  background: white;
-  border-radius: 20px;
-  padding: 25px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
+    width: 250px;
+    height: auto;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 16px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .product_card::before {
@@ -190,12 +176,6 @@ body {
 }
 .xiaomi_card::before {
   background: linear-gradient(45deg, #ff6900, #ff8533);
-}
-.motorola_card::before {
-  background: linear-gradient(45deg, #0066cc, #004499);
-}
-.lg_card::before {
-  background: linear-gradient(45deg, #a50034, #d6336c);
 }
 
 .product_card:hover {
@@ -224,12 +204,6 @@ body {
 }
 .xiaomi_image {
   background: linear-gradient(135deg, #ff6900, #ff8533);
-}
-.motorola_image {
-  background: linear-gradient(135deg, #0066cc, #004499);
-}
-.lg_image {
-  background: linear-gradient(135deg, #a50034, #d6336c);
 }
 
 .product_image::after {
@@ -280,12 +254,6 @@ body {
 .xiaomi_price {
   color: #ff6900;
 }
-.motorola_price {
-  color: #0066cc;
-}
-.lg_price {
-  color: #a50034;
-}
 
 .product_price .old_price {
   font-size: 0.7em;
@@ -317,12 +285,6 @@ body {
 .xiaomi_btn {
   background: linear-gradient(45deg, #ff6900, #ff8533);
 }
-.motorola_btn {
-  background: linear-gradient(45deg, #0066cc, #004499);
-}
-.lg_btn {
-  background: linear-gradient(45deg, #a50034, #d6336c);
-}
 
 .buy_btn:hover {
   transform: translateY(-2px);
@@ -348,12 +310,6 @@ body {
 }
 .xiaomi_badge {
   background: #ff6900;
-}
-.motorola_badge {
-  background: #0066cc;
-}
-.lg_badge {
-  background: #a50034;
 }
 
 @media (max-width: 768px) {

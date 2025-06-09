@@ -338,18 +338,6 @@ a {
   background: linear-gradient(45deg, #ff6900, #ff8533);
   color: white;
 }
-.brand-huawei {
-  background: linear-gradient(45deg, #ff0000, #cc0000);
-  color: white;
-}
-.brand_motorola {
-  background: linear-gradient(45deg, #004cff, #0066ff);
-  color: white;
-}
-.brand_lg {
-  background: linear-gradient(45deg, #a50034, #d4003a);
-  color: white;
-}
 
 .brand_info {
   padding: 20px;
