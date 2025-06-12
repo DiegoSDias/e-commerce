@@ -2,44 +2,50 @@
             alert(`🛒 Produto adicionado ao carrinho!\n\n📱 ${produto}\n💰 R$ ${preco}\n\n✅ Continue comprando ou finalize seu pedido pelo WhatsApp!`);
         }
 
-        function whatsapp(produto, preco) {
-            const mensagem = `Olá! Tenho interesse no produto:\n\n📱 ${produto}\n💰 R$ ${preco}\n\nPode me dar mais informações?`;
-            const url = `https://wa.me/5511999999999?text=${encodeURIComponent(mensagem)}`;
-            window.open(url, '_blank');
-        }
+function getCSRFToken() {
+  return document.querySelector("[name=csrfmiddlewaretoken]").value;
+}
 
-        // Animação de entrada
-        window.addEventListener('load', function() {
-            const cards = document.querySelectorAll('.product_card');
-            cards.forEach((card, index) => {
-                card.style.opacity = '0';
-                card.style.transform = 'translateY(50px)';
-                
-                setTimeout(() => {
-                    card.style.transition = 'all 0.6s ease';
-                    card.style.opacity = '1';
-                    card.style.transform = 'translateY(0)';
-                }, index * 100);
-            });
-        });
+function buyProduct(productName) {
+  // Animação do botão
+  event.target.style.transform = "scale(0.95)";
+  setTimeout(() => {
+    event.target.style.transform = "translateY(-2px)";
+  }, 150);
+}
 
-        // Efeito hover 3D
-        document.querySelectorAll('.product_card').forEach(card => {
-            card.addEventListener('mousemove', function(e) {
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                
-                const centerX = rect.width / 2;
-                const centerY = rect.height / 2;
-                
-                const rotateX = (y - centerY) / 15;
-                const rotateY = (centerX - x) / 15;
-                
-                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-10px)`;
-            });
-            
-            card.addEventListener('mouseleave', function() {
-                card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0)';
-            });
-        });
+window.onload = async () => {
+  try {
+    const response = await fetch("/product/detalhe/produto/");
+    const data = await response.json();
+
+    const produtos = data.resultados;
+    console.log("PORDUTOS: ", produtos)
+    const productsGrid = document.querySelector(".products_grid");
+    productsGrid.innerHTML = "";
+
+    const acessoriosGrid = document.getElementById("acessoriosGrid");
+    acessoriosGrid.innerHTML = "";
+    produtos.forEach((produto) => {
+
+    if (produto.nome_categoria == "Acessorios") {
+        const card = document.createElement("div");
+        
+        card.classList.add("product_card");
+        card.innerHTML = `
+                  <div class="product_image apple_image"></div>
+                  <h3 class="product_name">${produto.nome}</h3>
+                  <div class="product_specs">
+                      ${produto.descricao}
+                  </div>
+                  <div class="product_price">R$${produto.valor_unitario}</div>
+                  <button class="buy_btn apple_btn" onclick="buyProduct('${produto.nome}')">Comprar</button>
+              `;
+
+        acessoriosGrid.appendChild(card)
+    }
+    });
+  } catch (error) {
+    console.error("Erro ao carregar os produtos:", error);
+  }
+};

@@ -18,9 +18,18 @@ class Produto(models.Model):
     quantEstoque_max = models.IntegerField()
     id_categoria = models.IntegerField()
     id_fornecedor = models.CharField(max_length=100)
+    id_marca = models.IntegerField()
 
     class Meta:
         db_table = 'produto'
+        managed = False
+        
+class Marca(models.Model):
+    id_marca = models.IntegerField()
+    nome = models.CharField(max_length=20)
+    
+    class Meta:
+        db_table = 'marca'
         managed = False
 
 class Pedidos(models.Model):
@@ -92,3 +101,21 @@ class Envio(models.Model):
     class Meta:
         db_table = 'envio'
         managed = False
+        
+class Carinho(models.Model):
+    id_carrinho = models.IntegerField()
+    id_usuario = models.IntegerField()
+    data_criacao = models.DateTimeField()
+    
+    class Meta:
+            db_table = 'carrinho'
+            managed = False
+            
+class Carinho_Produto(models.Model):
+    id_carrinho = models.IntegerField()
+    id_produto = models.IntegerField()
+    quantidade = models.DateTimeField()
+    
+    class Meta:
+            db_table = 'carrinho_produto'
+            managed = False

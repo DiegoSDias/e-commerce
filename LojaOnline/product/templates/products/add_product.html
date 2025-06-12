@@ -11,9 +11,10 @@
 <body>
     <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
 
+    <a href="{% url 'menu' %}">Voltar para menu</a>
     <div class="container">
         <div id="formProduto">
-            <h3>Adicionar Produto</h3>
+            <h3 id="produtoTitle">Adicionar Produto</h3>
             <form id="produtoForm">
                 <div class="input_group">
                     <input type="text" id="nome" placeholder="Nome" required>
@@ -41,6 +42,16 @@
                         {% endfor %}
                     </select>
                 </div>
+
+                <div class="input_group">
+                    <label>Marca:</label>
+                    <select id="id_marca" >
+                        <option value="" selected>Sem marca</option>
+                        {% for marca in marcas %}
+                            <option value="{{ marca.0 }}">{{ marca.1 }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
                 <div class="input_group">
                    <label>Fornecedor:</label>
                     <select id="id_fornecedor" required>
@@ -49,28 +60,41 @@
                         {% endfor %}
                     </select>
                 </div>
-                <button type="submit">Salvar</button>
+                <button id="produtoSubmitBtn" type="submit">Salvar</button>
                 <button type="button" onclick="mostrarOpcoes('produto')">Ver Produtos</button>
             </form>
         </div>
     </div>
 
-     <div class="container">
+    <div class="container">
         <div id="formProduto">
-            <h3>Adicionar Categoria</h3>
+            <h3 id="categoriaTitle">Adicionar Categoria</h3>
             <form id="categoriaForm">
                 <div class="input_group">
                     <input type="text" id="nome_categoria" placeholder="Nome da categoria" required>
                 </div>
-                <button type="submit">Salvar Categoria</button>
+                <button id="categoriaSubmitBtn" type="submit">Salvar Categoria</button>
                 <button type="button" onclick="mostrarOpcoes('categoria')">Ver Categorias</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="container">
+        <div id="formProduto">
+            <h3 id="marcaTitle">Adicionar Marca</h3>
+            <form id="marcaForm">
+                <div class="input_group">
+                    <input type="text" id="nome_marca" placeholder="Nome da marca" required>
+                </div>
+                <button id="marcaSubmitBtn" type="submit">Salvar Marca</button>
+                <button type="button" onclick="mostrarOpcoes('marca')">Ver Marca</button>
             </form>
         </div>
     </div>
     
     <div class="container">
         <div id="formProduto">
-            <h3>Adicionar Endereço</h3>
+            <h3 id="enderecoTitle">Adicionar Endereço</h3>
             <form id="enderecoForm">
                 <input type="text" id="rua" placeholder="Nome da rua" required>
                 <input type="text" id="num_casa" placeholder="Número da casa" required>
@@ -79,7 +103,7 @@
                 <input type="text" id="estado" placeholder="Estado EX:(MG)" required>
                 <input type="text" id="complemento" placeholder="Complemento EX:(Apto. 101)" required>
                 <input type="text" id="ponto_referencia" placeholder="Ponto de Referência" required>
-                <button type="submit">Salvar Endereço</button>
+                <button id="enderecoSubmitBtn" type="submit">Salvar Endereço</button>
                 <button type="button" onclick="mostrarOpcoes('endereco')">Ver Endereços</button>
             </form>
         </div>
@@ -87,7 +111,7 @@
 
     <div class="container">
         <div id="formProduto">
-            <h3>Adicionar Fornecedor</h3>
+            <h3 id="fornecedorTitle">Adicionar Fornecedor</h3>
             <form id="fornecedorForm">
                 <input type="text" id="cnpj" placeholder="CNPJ" required>
                 <input type="text" id="nome_fornecedor" placeholder="Nome" required>
@@ -101,7 +125,7 @@
                             </option>
                         {% endfor %}
                     </select>
-                <button type="submit">Salvar Fornecedor</button>
+                <button id="fornecedorSubmitBtn" type="submit">Salvar Fornecedor</button>
                 <button type="button" onclick="mostrarOpcoes('fornecedor')">Ver Fornecedores</button>
             </form>
         </div>

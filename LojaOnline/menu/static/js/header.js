@@ -17,14 +17,8 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-   const cart = document.querySelector(".cart_icon");
-  cart.addEventListener("click", function (e) {
-    e.preventDefault();
-    alert("Funcionalidade do carrinho aqui");
-  });
-
   /*
-    const options_menu = document.querySelectorAll(".option_menu a");
+  const options_menu = document.querySelectorAll(".option_menu a");
   options_menu.forEach((option) => {
     option.addEventListener("click", function (e) {
       e.preventDefault();
@@ -33,5 +27,6 @@ document.addEventListener("DOMContentLoaded", function () {
         alert(`Navegando para: ${option_chosen}`);
       }
     });
-  });*/
+  });
+  */
 });
