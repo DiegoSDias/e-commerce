@@ -134,3 +134,24 @@ button:hover {
         margin: 10px 0;
     }
 }
+
+.btn-voltar {
+  position: flex;
+  top: 20px;
+  left: 20px;
+  background: rgba(255, 255, 255, 0.8);
+  color: #764ba2;
+  padding: 10px 20px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+  z-index: 1000;
+}
+
+.btn-voltar:hover {
+  background: white;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
