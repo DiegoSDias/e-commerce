@@ -1,114 +1,113 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Adicionar Produto</title>
- 
+
     {% load static %}
-    <link rel="stylesheet" href="{% static 'css/add_product.css' %}">
-</head>
-<body>
-    <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+    <link rel="stylesheet" href="{% static 'css/add_product.css' %}" />
+  </head>
 
-    <div class="container">
-        <div id="formProduto">
-            <h3>Adicionar Produto</h3>
-            <form id="produtoForm">
-                <div class="input_group">
-                    <input type="text" id="nome" placeholder="Nome" required>
-                </div>
-                <div class="input_group">
-                    <input type="text" id="descricao" placeholder="Descrição" required>
-                </div>
-                <div class="input_group">
-                    <input type="number" step="0.01" id="valor_unitario" placeholder="Valor unitário" required>
-                </div>
-                <div class="input_group">
-                    <input type="number" id="quantEstoque_disponivel" placeholder="Estoque disponível" required>
-                </div>
-                <div class="input_group">
-                    <input type="number" id="quantEstoque_min" placeholder="Estoque mínimo" required>
-                </div>
-                <div class="input_group">
-                    <input type="number" id="quantEstoque_max" placeholder="Estoque máximo" required>
-                </div>
-                <div class="input_group">
-                    <label>Categoria:</label>
-                    <select id="id_categoria" required>
-                        {% for categoria in categorias %}
-                            <option value="{{ categoria.0 }}">{{ categoria.1 }}</option>
-                        {% endfor %}
-                    </select>
-                </div>
-                <div class="input_group">
-                   <label>Fornecedor:</label>
-                    <select id="id_fornecedor" required>
-                        {% for fornecedor in fornecedores %}
-                            <option value="{{ fornecedor.0 }}">{{ fornecedor.1 }}</option>
-                        {% endfor %}
-                    </select>
-                </div>
-                <button type="submit">Salvar</button>
-                <button type="button" onclick="mostrarOpcoes('produto')">Ver Produtos</button>
-            </form>
-        </div>
-    </div>
-
-     <div class="container">
-        <div id="formProduto">
-            <h3>Adicionar Categoria</h3>
-            <form id="categoriaForm">
-                <div class="input_group">
-                    <input type="text" id="nome_categoria" placeholder="Nome da categoria" required>
-                </div>
-                <button type="submit">Salvar Categoria</button>
-                <button type="button" onclick="mostrarOpcoes('categoria')">Ver Categorias</button>
-            </form>
-        </div>
-    </div>
-    
-    <div class="container">
-        <div id="formProduto">
-            <h3>Adicionar Endereço</h3>
-            <form id="enderecoForm">
-                <input type="text" id="rua" placeholder="Nome da rua" required>
-                <input type="text" id="num_casa" placeholder="Número da casa" required>
-                <input type="text" id="cep" placeholder="cep" required>
-                <input type="text" id="cidade" placeholder="Cidade" required>
-                <input type="text" id="estado" placeholder="Estado EX:(MG)" required>
-                <input type="text" id="complemento" placeholder="Complemento EX:(Apto. 101)" required>
-                <input type="text" id="ponto_referencia" placeholder="Ponto de Referência" required>
-                <button type="submit">Salvar Endereço</button>
-                <button type="button" onclick="mostrarOpcoes('endereco')">Ver Endereços</button>
-            </form>
-        </div>
+  <body>
+    <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}" />
+    <div>
+      <div class="container">
+      <div id="formProduto">
+        <h3>Adicionar Produto</h3>
+        <form id="produtoForm">
+          <div class="input_group">
+            <input type="text" id="nome" placeholder="Nome" required />
+          </div>
+          <div class="input_group">
+            <input type="text" id="descricao" placeholder="Descrição" required />
+          </div>
+          <div class="input_group">
+            <input type="number" step="0.01" id="valor_unitario" placeholder="Valor unitário" required />
+          </div>
+          <div class="input_group">
+            <input type="number" id="quantEstoque_disponivel" placeholder="Estoque disponível" required />
+          </div>
+          <div class="input_group">
+            <input type="number" id="quantEstoque_min" placeholder="Estoque mínimo" required />
+          </div>
+          <div class="input_group">
+            <input type="number" id="quantEstoque_max" placeholder="Estoque máximo" required />
+          </div>
+          <div class="input_group">
+            <label>Categoria:</label>
+            <select id="id_categoria" required>
+              {% for categoria in categorias %}
+                <option value="{{ categoria.0 }}">{{ categoria.1 }}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="input_group">
+            <label>Fornecedor:</label>
+            <select id="id_fornecedor" required>
+              {% for fornecedor in fornecedores %}
+                <option value="{{ fornecedor.0 }}">{{ fornecedor.1 }}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <button type="submit">Salvar</button>
+          <button type="button" onclick="mostrarOpcoes('produto')">Ver Produtos</button>
+        </form>
+      </div>
     </div>
 
     <div class="container">
-        <div id="formProduto">
-            <h3>Adicionar Fornecedor</h3>
-            <form id="fornecedorForm">
-                <input type="text" id="cnpj" placeholder="CNPJ" required>
-                <input type="text" id="nome_fornecedor" placeholder="Nome" required>
-                <input type="email" id="email_fornecedor" placeholder="Email" required>
-                <input type="text" id="telefone_fornecedor" placeholder="Telefone" required>
-            <label>Endereço:</label>
-                    <select id="id_endereco" required>
-                        {% for endereco in enderecos %}
-                            <option value="{{ endereco.0 }}">
-                                {{ endereco.1 }}, {{ endereco.2 }} - {{ endereco.3 }}
-                            </option>
-                        {% endfor %}
-                    </select>
-                <button type="submit">Salvar Fornecedor</button>
-                <button type="button" onclick="mostrarOpcoes('fornecedor')">Ver Fornecedores</button>
-            </form>
-        </div>
+      <div id="formCategoria">
+        <h3>Adicionar Categoria</h3>
+        <form id="categoriaForm">
+          <div class="input_group">
+            <input type="text" id="nome_categoria" placeholder="Nome da categoria" required />
+          </div>
+          <button type="submit">Salvar Categoria</button>
+          <button type="button" onclick="mostrarOpcoes('categoria')">Ver Categorias</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="container">
+      <div id="formEndereço">
+        <h3>Adicionar Endereço</h3>
+        <form id="enderecoForm">
+          <input type="text" id="rua" placeholder="Nome da rua" required />
+          <input type="text" id="num_casa" placeholder="Número da casa" required />
+          <input type="text" id="cep" placeholder="cep" required />
+          <input type="text" id="cidade" placeholder="Cidade" required />
+          <input type="text" id="estado" placeholder="Estado EX:(MG)" required />
+          <input type="text" id="complemento" placeholder="Complemento EX:(Apto. 101)" required />
+          <input type="text" id="ponto_referencia" placeholder="Ponto de Referência" required />
+          <button type="submit">Salvar Endereço</button>
+          <button type="button" onclick="mostrarOpcoes('endereco')">Ver Endereços</button>
+        </form>
+      </div>
+    </div>
+
+    <div class="container">
+      <div id="formFornecedor">
+        <h3>Adicionar Fornecedor</h3>
+        <form id="fornecedorForm">
+          <input type="text" id="cnpj" placeholder="CNPJ" required />
+          <input type="text" id="nome_fornecedor" placeholder="Nome" required />
+          <input type="email" id="email_fornecedor" placeholder="Email" required />
+          <input type="text" id="telefone_fornecedor" placeholder="Telefone" required />
+          <label>Endereço:</label>
+          <select id="id_endereco" required>
+            {% for endereco in enderecos %}
+              <option value="{{ endereco.0 }}">{{ endereco.1 }}, {{ endereco.2 }} - {{ endereco.3 }}</option>
+            {% endfor %}
+          </select>
+          <button type="submit">Salvar Fornecedor</button>
+          <button type="button" onclick="mostrarOpcoes('fornecedor')">Ver Fornecedores</button>
+        </form>
+      </div>
     </div>
 
     <div id="resultados" style="margin-top: 20px; padding: 10px; border: 1px solid #ccc; display: none;"></div>
 
     <script src="{% static 'js/add_product.js' %}"></script>
-</body>
+  </body>
 </html>

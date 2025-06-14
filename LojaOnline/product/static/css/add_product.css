@@ -1,90 +1,124 @@
-     * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-        body {
-            font-family: "Inter", "Segoe UI", system-ui, sans-serif;
-            background-color: #f8fafc;
-            color: #1e293b;
-            line-height: 1.6;
-            padding: 2rem 1rem;
-        }
+body {
+    font-family: "Inter", "Segoe UI", system-ui, sans-serif;
+    background-color: #f8fafc;
+    color: #1e293b;
+    line-height: 1.6;
+    padding: 2rem 1rem;
+}
 
-        .container {
-            max-width: 500px;
-            margin: 0 auto;
-        }
+.container {
+    max-width: 500px;
+    margin: 2rem auto;
+    margin-bottom: 2rem;
+}
 
-        #formProduto {
-            background: white;
-            border-radius: 8px;
-            padding: 2rem;
-            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
-            border: 1px solid #e2e8f0;
-        }
+#formProduto,
+#formCategoria,
+#formEndereço {
+    margin-bottom: 20px;
+}
 
-        h3 {
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: #1e293b;
-            margin-bottom: 1.5rem;
-            text-align: center;
-        }
+#formProduto {
+    background: white;
+    border-radius: 8px;
+    padding: 2rem;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+    border: 1px solid #e2e8f0;
+    margin-bottom: 12px;
+}
 
-        .input_group {
-            margin-bottom: 1rem;
-        }
+#formCategoria {
+    background: white;
+    border-radius: 8px;
+    padding: 2rem;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+    border: 1px solid #e2e8f0;
+    margin-bottom: 12px;
+}
 
-        input {
-            width: 100%;
-            padding: 0.75rem;
-            border: 1px solid #d1d5db;
-            border-radius: 6px;
-            font-size: 0.875rem;
-            transition: border-color 0.2s ease;
-            background-color: white;
-        }
+#formEndereço {
+    background: white;
+    border-radius: 8px;
+    padding: 2rem;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+    border: 1px solid #e2e8f0;
+    margin-bottom: 12px;
+}
 
-        input:focus {
-            outline: none;
-            border-color: #3730a3;
-            box-shadow: 0 0 0 3px rgba(55, 48, 163, 0.1);
-        }
+#formFornecedor {
+    background: white;
+    border-radius: 8px;
+    padding: 2rem;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+    border: 1px solid #e2e8f0;
+}
 
-        input::placeholder {
-            color: #9ca3af;
-        }
+h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #1e293b;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
 
-        button {
-            width: 100%;
-            background-color: #3730a3;
-            color: white;
-            border: none;
-            padding: 0.75rem;
-            border-radius: 6px;
-            font-size: 0.875rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: background-color 0.2s ease;
-            margin-top: 0.5rem;
-        }
+.input_group {
+    margin-bottom: 1rem;
+}
 
-        button:hover {
-            background-color: #312e81;
-        }
+input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    font-size: 0.875rem;
+    transition: border-color 0.2s ease;
+    background-color: white;
+}
 
-        button:active {
-            transform: translateY(1px);
-        }
+input:focus {
+    outline: none;
+    border-color: #3730a3;
+    box-shadow: 0 0 0 3px rgba(55, 48, 163, 0.1);
+}
 
-        @media (max-width: 600px) {
-            body {
-                padding: 1rem 0.5rem;
-            }
+input::placeholder {
+    color: #9ca3af;
+}
 
-            #formProduto {
-                padding: 1.5rem;
-            }
-        }
+button {
+    width: 100%;
+    background-color: #3730a3;
+    color: white;
+    border: none;
+    padding: 0.75rem;
+    border-radius: 6px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    margin-top: 0.5rem;
+}
+
+button:hover {
+    background-color: #312e81;
+}
+
+button:active {
+    transform: translateY(1px);
+}
+
+@media (max-width: 600px) {
+    body {
+        padding: 1rem 0.5rem;
+    }
+
+    #formProduto {
+        padding: 1.5rem;
+    }
+}

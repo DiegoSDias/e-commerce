@@ -5,6 +5,8 @@ function getCSRFToken() {
 document.getElementById("produtoForm").addEventListener("submit", async function (event) {
   event.preventDefault();
 
+  //Código aqui
+
   const dados = {
     nome: document.getElementById("nome").value,
     descricao: document.getElementById("descricao").value,
