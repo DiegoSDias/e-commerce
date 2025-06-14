@@ -11,8 +11,17 @@
 
   <body>
     <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}" />
-    <div>
-      <div class="container">
+
+    <!-- Menu de navegação -->
+    <div style="text-align: center; margin-bottom: 20px;">
+      <button onclick="abrirFormulario('formProduto')">Adicionar Produto</button>
+      <button onclick="abrirFormulario('formCategoria')">Adicionar Categoria</button>
+      <button onclick="abrirFormulario('formEndereço')">Adicionar Endereço</button>
+      <button onclick="abrirFormulario('formFornecedor')">Adicionar Fornecedor</button>
+    </div>
+
+    <!-- Formulário de Produto -->
+    <div class="container">
       <div id="formProduto">
         <h3>Adicionar Produto</h3>
         <form id="produtoForm">
@@ -56,6 +65,7 @@
       </div>
     </div>
 
+    <!-- Formulário de Categoria -->
     <div class="container">
       <div id="formCategoria">
         <h3>Adicionar Categoria</h3>
@@ -69,13 +79,14 @@
       </div>
     </div>
 
+    <!-- Formulário de Endereço -->
     <div class="container">
       <div id="formEndereço">
         <h3>Adicionar Endereço</h3>
         <form id="enderecoForm">
           <input type="text" id="rua" placeholder="Nome da rua" required />
           <input type="text" id="num_casa" placeholder="Número da casa" required />
-          <input type="text" id="cep" placeholder="cep" required />
+          <input type="text" id="cep" placeholder="CEP" required />
           <input type="text" id="cidade" placeholder="Cidade" required />
           <input type="text" id="estado" placeholder="Estado EX:(MG)" required />
           <input type="text" id="complemento" placeholder="Complemento EX:(Apto. 101)" required />
@@ -86,6 +97,7 @@
       </div>
     </div>
 
+    <!-- Formulário de Fornecedor -->
     <div class="container">
       <div id="formFornecedor">
         <h3>Adicionar Fornecedor</h3>
@@ -106,8 +118,23 @@
       </div>
     </div>
 
+    <!-- Resultados de Listagens -->
     <div id="resultados" style="margin-top: 20px; padding: 10px; border: 1px solid #ccc; display: none;"></div>
 
+    <!-- Scripts -->
     <script src="{% static 'js/add_product.js' %}"></script>
+    <script>
+      function abrirFormulario(id) {
+        const formularios = ['formProduto', 'formCategoria', 'formEndereço', 'formFornecedor']
+        formularios.forEach(function (form) {
+          document.getElementById(form).parentElement.style.display = 'none'
+        })
+        document.getElementById(id).parentElement.style.display = 'block'
+      }
+      
+      document.addEventListener('DOMContentLoaded', function () {
+        abrirFormulario('formProduto') // Exibe o de produto por padrão
+      })
+    </script>
   </body>
 </html>

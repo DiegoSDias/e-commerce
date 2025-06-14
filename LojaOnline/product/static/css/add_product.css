@@ -12,51 +12,26 @@ body {
     padding: 2rem 1rem;
 }
 
+/* Container geral dos formulários */
 .container {
     max-width: 500px;
     margin: 2rem auto;
     margin-bottom: 2rem;
+    display: none;
+    /* todos escondidos por padrão */
 }
 
+/* Blocos de formulário */
 #formProduto,
 #formCategoria,
-#formEndereço {
-    margin-bottom: 20px;
-}
-
-#formProduto {
-    background: white;
-    border-radius: 8px;
-    padding: 2rem;
-    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
-    border: 1px solid #e2e8f0;
-    margin-bottom: 12px;
-}
-
-#formCategoria {
-    background: white;
-    border-radius: 8px;
-    padding: 2rem;
-    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
-    border: 1px solid #e2e8f0;
-    margin-bottom: 12px;
-}
-
-#formEndereço {
-    background: white;
-    border-radius: 8px;
-    padding: 2rem;
-    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
-    border: 1px solid #e2e8f0;
-    margin-bottom: 12px;
-}
-
+#formEndereço,
 #formFornecedor {
     background: white;
     border-radius: 8px;
     padding: 2rem;
     box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
     border: 1px solid #e2e8f0;
+    margin-bottom: 12px;
 }
 
 h3 {
@@ -67,11 +42,13 @@ h3 {
     text-align: center;
 }
 
+/* Inputs */
 .input_group {
     margin-bottom: 1rem;
 }
 
-input {
+input,
+select {
     width: 100%;
     padding: 0.75rem;
     border: 1px solid #d1d5db;
@@ -81,7 +58,8 @@ input {
     background-color: white;
 }
 
-input:focus {
+input:focus,
+select:focus {
     outline: none;
     border-color: #3730a3;
     box-shadow: 0 0 0 3px rgba(55, 48, 163, 0.1);
@@ -91,6 +69,7 @@ input::placeholder {
     color: #9ca3af;
 }
 
+/* Botões */
 button {
     width: 100%;
     background-color: #3730a3;
@@ -113,12 +92,25 @@ button:active {
     transform: translateY(1px);
 }
 
+/* Menu de botões do topo */
+div[style*="margin-bottom: 20px"] button {
+    width: auto;
+    margin: 0 5px;
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    background-color: #4f46e5;
+}
+
+div[style*="margin-bottom: 20px"] button:hover {
+    background-color: #4338ca;
+}
+
 @media (max-width: 600px) {
     body {
         padding: 1rem 0.5rem;
     }
 
-    #formProduto {
+    .container {
         padding: 1.5rem;
     }
 }
