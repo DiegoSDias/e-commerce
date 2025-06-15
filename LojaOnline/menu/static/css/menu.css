@@ -89,18 +89,13 @@ header {
   right: 5px;
   top: 50%;
   transform: translateY(-50%);
-  background: #ff6b35;
   border: none;
   border-radius: 50%;
   width: 40px;
   height: 40px;
-  color: white;
+  color: rgba(255, 255, 255, 0.8);
   cursor: pointer;
   transition: background 0.3s;
-}
-
-.search_btn:hover {
-  background: #e55a2b;
 }
 
 .cart {
@@ -129,7 +124,6 @@ header {
   position: absolute;
   top: 0;
   right: 0;
-  background: #ff6b35;
   color: white;
   border-radius: 50%;
   width: 20px;
@@ -155,10 +149,13 @@ a {
   top: 0;
   left: 0;
   width: 100vw;
-  height: 100vh; /* ocupa a tela toda */
+  height: 100vh;
+  /* ocupa a tela toda */
   background-color: rgba(0, 0, 0, 0.5);
-  justify-content: center; /* centraliza horizontal */
-  align-items: center; /* centraliza vertical */
+  justify-content: center;
+  /* centraliza horizontal */
+  align-items: center;
+  /* centraliza vertical */
   z-index: 1000;
   display: none;
 }
@@ -169,11 +166,11 @@ a {
   justify-content: center;
 }
 
-.option_menu > li {
+.option_menu>li {
   position: relative;
 }
 
-.option_menu > li > a {
+.option_menu>li>a {
   display: block;
   color: white;
   text-decoration: none;
@@ -183,8 +180,8 @@ a {
   position: relative;
 }
 
-.option_menu > li > a:hover,
-.option_menu > li:hover > a {
+.option_menu>li>a:hover,
+.option_menu>li:hover>a {
   background-color: rgba(255, 255, 255, 0.1);
   transform: translateY(-2px);
 }
@@ -241,7 +238,7 @@ a {
     url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><defs><linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="%231e3c72"/><stop offset="100%" stop-color="%232a5298"/></linearGradient></defs><rect fill="url(%23bg)" width="1200" height="600"/><text x="600" y="250" text-anchor="middle" fill="white" font-size="60" font-family="Arial">📱</text></svg>');
   background-size: cover;
   background-position: center;
-  height: 500px;
+  height: 800px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -263,8 +260,8 @@ a {
 
 .see_product {
   display: inline-block;
-  background: #ff6b35;
-  color: white;
+  background: rgba(255, 255, 255, 0.8);
+  color: #764ba2;
   padding: 15px 35px;
   text-decoration: none;
   border-radius: 30px;
@@ -276,9 +273,9 @@ a {
 }
 
 .see_product:hover {
-  background: #e55a2b;
-  transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(255, 107, 53, 0.4);
+  background: white;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 
 .brands {
@@ -330,10 +327,12 @@ a {
   background: linear-gradient(45deg, #000, #333);
   color: white;
 }
+
 .brand_samsung {
   background: linear-gradient(45deg, #1f4e8c, #3569c4);
   color: white;
 }
+
 .brand_xiaomi {
   background: linear-gradient(45deg, #ff6900, #ff8533);
   color: white;
@@ -476,7 +475,7 @@ a {
     display: flex;
   }
 
-  .option_menu > li > a {
+  .option_menu>li>a {
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   }
 

@@ -66,14 +66,6 @@ body {
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
 }
 
-.products_section {
-  background: rgba(255, 255, 255, 0.95);
-  margin: 30px 20px;
-  border-radius: 20px;
-  padding: 40px;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-}
-
 .brand_section {
   margin-bottom: 60px;
 }
@@ -83,8 +75,8 @@ body {
   align-items: center;
   justify-content: center;
   gap: 20px;
-  margin-bottom: 40px;
-  padding: 30px;
+  margin-bottom: 50px;
+  padding: 20px;
   border-radius: 20px;
   position: relative;
   overflow: hidden;
@@ -101,33 +93,24 @@ body {
   z-index: 0;
 }
 
-.brand_header > * {
+.brand_header>* {
   position: relative;
   z-index: 1;
 }
 
 .apple_header {
-  background: linear-gradient(135deg, #000000, #434343);
-  color: white;
-}
-.apple_header::before {
-  background: linear-gradient(135deg, #ffffff, #f0f0f0);
+  background: rgba(255, 255, 255, 0.8);
+  color: #764ba2;
 }
 
 .samsung_header {
-  background: linear-gradient(135deg, #1428a0, #004de6);
-  color: white;
-}
-.samsung_header::before {
-  background: linear-gradient(135deg, #1428a0, #004de6);
+  background: rgba(255, 255, 255, 0.8);
+  color: #764ba2;
 }
 
 .xiaomi_header {
-  background: linear-gradient(135deg, #ff6900, #ff8533);
-  color: white;
-}
-.xiaomi_header::before {
-  background: linear-gradient(135deg, #ff6900, #ff8533);
+  background: rgba(255, 255, 255, 0.8);
+  color: #764ba2;
 }
 
 .brand_logo {
@@ -142,21 +125,21 @@ body {
 }
 
 .products_grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, auto));
-    gap: 20px;
-    justify-items: center;
-    align-items: start;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, auto));
+  gap: 20px;
+  justify-items: center;
+  align-items: start;
 }
 
 .product_card {
-    width: 250px;
-    height: auto;
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 16px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  width: 250px;
+  height: auto;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  padding: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .product_card::before {
@@ -166,16 +149,6 @@ body {
   left: 0;
   right: 0;
   height: 5px;
-}
-
-.apple_card::before {
-  background: linear-gradient(45deg, #000000, #434343);
-}
-.samsung_card::before {
-  background: linear-gradient(45deg, #1428a0, #004de6);
-}
-.xiaomi_card::before {
-  background: linear-gradient(45deg, #ff6900, #ff8533);
 }
 
 .product_card:hover {
@@ -199,11 +172,13 @@ body {
 .apple_image {
   background: linear-gradient(135deg, #000000, #434343);
 }
+
 .samsung_image {
-  background: linear-gradient(135deg, #1428a0, #004de6);
+  background: linear-gradient(135deg, #000000, #434343);
 }
+
 .xiaomi_image {
-  background: linear-gradient(135deg, #ff6900, #ff8533);
+  background: linear-gradient(135deg, #000000, #434343);
 }
 
 .product_image::after {
@@ -214,10 +189,12 @@ body {
 }
 
 @keyframes float {
+
   0%,
   100% {
     transform: translateY(0px);
   }
+
   50% {
     transform: translateY(-10px);
   }
@@ -248,11 +225,13 @@ body {
 .apple_price {
   color: #000000;
 }
+
 .samsung_price {
-  color: #1428a0;
+  color: #000000;
 }
+
 .xiaomi_price {
-  color: #ff6900;
+  color: #000000;
 }
 
 .product_price .old_price {
@@ -279,11 +258,13 @@ body {
 .apple_btn {
   background: linear-gradient(45deg, #000000, #434343);
 }
+
 .samsung_btn {
-  background: linear-gradient(45deg, #1428a0, #004de6);
+  background: linear-gradient(45deg, #000000, #434343);
 }
+
 .xiaomi_btn {
-  background: linear-gradient(45deg, #ff6900, #ff8533);
+  background: linear-gradient(45deg, #000000, #434343);
 }
 
 .buy_btn:hover {
@@ -300,16 +281,6 @@ body {
   font-size: 0.8em;
   font-weight: 600;
   color: white;
-}
-
-.apple_badge {
-  background: #000000;
-}
-.samsung_badge {
-  background: #1428a0;
-}
-.xiaomi_badge {
-  background: #ff6900;
 }
 
 @media (max-width: 768px) {
@@ -343,4 +314,8 @@ body {
   .brand_title {
     font-size: 2em;
   }
+}
+
+.brand_section:first-of-type .brand_header {
+  margin-top: 50px;
 }
