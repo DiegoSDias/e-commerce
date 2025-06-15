@@ -88,10 +88,10 @@ h2 {
 .btn {
   width: 100%;
   padding: 15px;
-  background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+  background: rgba(255, 255, 255, 0.8);
   border: none;
   border-radius: 50px;
-  color: white;
+  color: #764ba2;
   font-size: 16px;
   font-weight: 600;
   cursor: pointer;
@@ -106,9 +106,9 @@ h2 {
 }
 
 .btn:hover {
-  background: linear-gradient(45deg, #ee5a24, #ff6b6b);
+  background: white;
   transform: translateY(-2px);
-  box-shadow: 0 10px 20px rgba(238, 90, 36, 0.4);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 
 .btn:active {
@@ -122,7 +122,7 @@ h2 {
 }
 
 .toggle_link {
-  color: #ff6b6b;
+  color: #ffffff;
   text-decoration: none;
   font-weight: 600;
   cursor: pointer;
@@ -131,7 +131,7 @@ h2 {
 }
 
 .toggle_link:hover {
-  color: #ee5a24;
+  color: rgba(255, 255, 255, 0.8);
   border-bottom-color: #ee5a24;
 }
 
@@ -171,4 +171,25 @@ h2 {
   h2 {
     font-size: 1.8em;
   }
+}
+
+.btn-voltar {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background: rgba(255, 255, 255, 0.8);
+  color: #764ba2;
+  padding: 10px 20px;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+  z-index: 1000;
+}
+
+.btn-voltar:hover {
+  background: white;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
