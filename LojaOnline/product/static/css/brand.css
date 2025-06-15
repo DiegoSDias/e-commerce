@@ -142,21 +142,21 @@ body {
 }
 
 .products_grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, auto));
-    gap: 20px;
-    justify-items: center;
-    align-items: start;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, auto));
+  gap: 20px;
+  justify-items: center;
+  align-items: start;
 }
 
 .product_card {
-    width: 250px;
-    height: auto;
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 16px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  width: 250px;
+  height: auto;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .product_card::before {
@@ -310,6 +310,133 @@ body {
 }
 .xiaomi_badge {
   background: #ff6900;
+}
+
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal_content {
+  background-color: white;
+  margin: 5% auto;
+  padding: 0;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 600px;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modal_header {
+  padding: 1.5rem;
+  border-bottom: 1px solid #e2e8f0;
+  display: flex;
+  justify-content: between;
+  align-items: center;
+}
+
+.modal_title {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.close_btn {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #64748b;
+  margin-left: auto;
+}
+
+.close_btn:hover {
+  color: #1e293b;
+}
+
+.modal_body {
+  padding: 1.5rem;
+}
+
+.product_detail_image {
+  width: 100%;
+  height: 250px;
+  background: #f1f5f9;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 4rem;
+}
+
+.product_detail_info {
+  margin-bottom: 1.5rem;
+}
+
+.product_detail_name {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.product_detail_description {
+  color: #64748b;
+  margin-bottom: 1rem;
+}
+
+.product_detail_price {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #1d1d1f;
+  margin-bottom: 1.5rem;
+}
+
+.product_actions {
+  display: flex;
+  gap: 1rem;
+}
+
+.btn_primary {
+  flex: 1;
+  padding: 0.75rem 1.5rem;
+  background-color: #1d1d1f;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn_primary:hover {
+  background-color: #000000;
+}
+
+.btn_secondary {
+  flex: 1;
+  padding: 0.75rem 1.5rem;
+  background-color: white;
+  color: #1d1d1f;
+  border: 1px solid #1d1d1f;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn_secondary:hover {
+  background-color: #1d1d1f;
+  color: white;
 }
 
 @media (max-width: 768px) {

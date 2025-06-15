@@ -9,6 +9,8 @@
      <link rel="stylesheet" href="{% static "css/cart.css" %}">
 </head>
 <body>
+    <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+    
     <div class="container">
         <h1>Carrinho de Compras</h1>
 
@@ -27,7 +29,7 @@
         <div class="cart_summary" id="summary">
             <div class="summary_row">
                 <span>Subtotal:</span>
-                <span id="subtotal">R$ 0,00</span>
+                <span id="subtotal"></span>
             </div>
             <div class="summary_row">
                 <span>Frete:</span>

@@ -1,7 +1,10 @@
 from django.shortcuts import render
 from django.http import JsonResponse
 from django.db import connection
-from .sql_services import salvar_produto, salvar_categoria, salvar_marca, salvar_fornecedor, salvar_endereco, atualizar_produto, atualizar_categoria, atualizar_marca, atualizar_fornecedor, atualizar_endereco
+from .sql_services import (salvar_produto, salvar_categoria, salvar_marca, salvar_fornecedor, 
+                           salvar_endereco, atualizar_produto, atualizar_categoria, atualizar_marca, 
+                           atualizar_fornecedor, atualizar_endereco, salvar_endereco_usuario, salvar_pedidos,
+                           salvar_carrinho, editar_quant_carrinho, remover_item_carrinho)
 import json
 
 def smartphones(request):
@@ -42,7 +45,6 @@ def adicionar_produto(request):
 def add_product(request):
     if request.method == "POST":
         dados = json.loads(request.body)
-        print("DADOOS: ", dados)
         nome = dados.get('nome'),
         descricao = dados.get('descricao'),
         valor_unitario = dados.get('valor_unitario'),
@@ -133,6 +135,65 @@ def listar_opcoes(request, tipo):
 
     return JsonResponse({'resultados': resultados})
 
+
+def add_address_user(request):
+        cpf_usuario = request.session.get('cpf_usuario')
+        if not cpf_usuario:
+            return JsonResponse({"erro": "Usuário não autenticado"}, status=401)
+
+        if request.method == "POST":
+            dados = json.loads(request.body)
+            rua = dados.get("rua")
+            numero = dados.get("numero")
+            cep = dados.get("cep")
+            cidade = dados.get("cidade")
+            estado = dados.get("estado")
+            complemento = dados.get("complemento")
+            ponto_referencia = dados.get("ponto_referencia")
+            
+            salvar_endereco_usuario(rua, numero, cep, cidade, estado, complemento, ponto_referencia, cpf_usuario)
+            return JsonResponse({"sucesso": "Endereço cadastrado com sucesso"})
+    
+        return JsonResponse({"erro": "Método não permitido"}, status=405)
+            
+def listar_end_usuario(request, tipo):
+    # Obtem o CPF do usuário logado
+    cpf_usuario = request.session.get('cpf_usuario')
+    mapa = {
+        'endereco': """
+            SELECT e.id_endereco, e.rua, e.numero, e.CEP, e.cidade
+            FROM endereco e
+            JOIN usuario_end ue ON e.id_endereco = ue.id_endereco
+            WHERE ue.CPF = %s
+        """
+    }
+
+    if tipo not in mapa:
+        return JsonResponse({'erro': 'Tipo inválido'}, status=400)
+
+    with connection.cursor() as cursor:
+        if tipo == 'endereco':
+            cursor.execute(mapa[tipo], [cpf_usuario])
+        else:
+            cursor.execute(mapa[tipo])
+        dados = cursor.fetchall()
+
+    # Formata os resultados com base no tipo
+    if tipo == 'endereco':
+        resultados = [{'id': r[0], 'nome': f"{r[1]}, {r[2]} - {r[3]}, {r[4]}"} for r in dados]
+
+    return JsonResponse({'resultados': resultados})
+
+def excluir_endereco(request, id):
+    if request.method == "DELETE":
+        
+        with connection.cursor() as cursor:
+            cursor.execute("DELETE FROM usuario_end WHERE id_endereco = %s", [id])
+            cursor.execute("DELETE FROM endereco WHERE id_endereco = %s", [id])
+
+        return JsonResponse({"sucesso": "Item excluído com sucesso"})
+    return JsonResponse({"erro": "Método não permitido"}, status=405)
+
 def excluir_item(request, tipo, id):
     if request.method == "DELETE":
         with connection.cursor() as cursor:
@@ -162,7 +223,6 @@ def detalhe_produto(request, tipo):
         
         # Agora, obtenha os resultados
         resultado = cursor.fetchall()
-        print("RESULTADO: ", resultado)
         
     if not resultado:
         return JsonResponse({'erro': 'Produto não encontrado'}, status=404)
@@ -221,3 +281,75 @@ def edit_item(request, tipo, id):
     return JsonResponse({"erro": "Método não permitido"}, status=405)
 
 
+def finalizar_produto(request):
+    return render(request, "brands/finalizar_produto.html")
+
+
+def salvar_pedido(request):
+    cpf_usuario = request.session.get('cpf_usuario')
+    if not cpf_usuario:
+        return JsonResponse({"erro": "Usuário não autenticado"}, status=401)
+
+    salvar_pedidos(cpf_usuario)
+    return JsonResponse({'sucesso': 'Pedido cadastrado com sucesso'})
+    
+
+def criar_carrinho(request):
+    
+    cpf_usuario = request.session.get('cpf_usuario')
+    if not cpf_usuario:
+        return JsonResponse({"erro": "Usuário não autenticado"}, status=401)
+        
+    dados = json.loads(request.body)
+    id_produto = dados.get("productId")
+    
+    salvar_carrinho(cpf_usuario, id_produto)
+    return JsonResponse({'sucesso': 'Carrinho cadastrado com sucesso'})
+    
+def mostra_carrinho(request):
+    cpf_usuario = request.session.get('cpf_usuario')
+    if not cpf_usuario:
+        return JsonResponse({"erro": "Usuário não autenticado"}, status=401)
+    
+    with connection.cursor() as cursor:
+        cursor.execute("""
+                        SELECT p.nome, p.valor_unitario, cp.quant, cp.id_carrinho, cp.id_produto FROM carrinho c
+                        JOIN carrinho_produto cp ON c.id_carrinho = cp.id_carrinho
+                        JOIN produto p ON cp.id_produto = p.id_produto
+                        WHERE c.id_usuario = %s;
+                        """, [cpf_usuario])
+            
+         # Acessar a descrição das colunas antes de consumir o cursor
+        columns = [col[0] for col in cursor.description]
+        
+        # Agora, obtenha os resultados
+        resultado = cursor.fetchall()
+        
+    if not resultado:
+        return JsonResponse({'erro': 'Produto não encontrado'}, status=404)
+
+    # Criar o dicionário a partir dos resultados
+    resultado_dict = [dict(zip(columns, row)) for row in resultado]  # Criando uma lista de dicionários
+    return JsonResponse({'resultado': resultado_dict})  # Retorne os resultados em um dicionário
+
+def editar_quant(request):
+    
+    cpf_usuario = request.session.get('cpf_usuario')
+    if not cpf_usuario:
+        return JsonResponse({"erro": "Usuário não autenticado"}, status=401)
+    
+    dados = json.loads(request.body)
+    quant = dados.get("quant")
+    id_carrinho = dados.get("id_carrinho")
+    id_produto = dados.get("id_produto")
+    editar_quant_carrinho(id_carrinho, id_produto, quant)
+    return JsonResponse({"sucesso": "Item atualizado com sucesso"})
+   
+def remover_item(request):
+    
+    dados = json.loads(request.body)
+    id_carrinho = dados.get("id_carrinho")
+    id_produto = dados.get("id_produto")
+    
+    remover_item_carrinho(id_carrinho, id_produto)
+    return JsonResponse({"sucesso": "Item atualizado com sucesso"})

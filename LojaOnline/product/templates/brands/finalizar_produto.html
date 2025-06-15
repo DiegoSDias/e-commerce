@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Endereço e Pagamento</title>
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static "css/finalizar_produto.css" %}">
+
+</head>
+<body>
+
+     <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+
+    <div class="container">
+        <div class="header">
+            <h1>Finalizar Pedido</h1>
+            <p>Insira seu endereço e escolha a forma de pagamento</p>
+        </div>
+
+        <div class="form-container">
+            <div id="orderForm">
+                <div class="section">
+                    <h2>Endereço de Entrega</h2>
+                    
+                    <!-- Endereço Salvo -->
+                    <div id="savedAddress" class="saved-address">
+                        <div class="address-card">
+                            <div class="address-header">
+                                <div class="address-info">
+                                    <div class="address-title">Endereço Principal</div>
+                                    <div class="address-details">
+                                        
+                                    </div>
+                                </div>
+                                <!--
+                                <div class="address-actions">
+                                    <button type="button" class="edit-btn" onclick="editAddress()">✏️</button>
+                                </div>
+                                -->
+                            </div>
+                        </div>
+                        <button type="button" class="new-address-btn" onclick="showenderecoForm()">
+                            <span>➕</span> Adicionar Novo Endereço
+                        </button>
+                    </div>
+
+                    <!-- Formulário de Novo Endereço -->
+                    <form id="enderecoForm" class="new-address-form" style="display: none;">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="rua">Rua/Avenida</label>
+                                <input type="text" id="rua" name="rua" maxlength="50">
+                            </div>
+                            <div class="form-group">
+                                <label for="num_casa">Número</label>
+                                <input type="text" id="num_casa" name="num_casa">
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="cep">CEP</label>
+                                <input type="text" id="cep" name="cep" maxlength="9" placeholder="00000-000">
+                            </div>
+                            <div class="form-group">
+                                <label for="complemento">Complemento</label>
+                                <input type="text" id="complemento" name="complemento" maxlength="20" placeholder="Apto, Bloco, etc.">
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="cidade">Cidade</label>
+                                <input type="text" id="cidade" name="cidade" maxlength="50">
+                            </div>
+                            <div class="form-group">
+                                <label for="estado">Estado</label>
+                                <select id="estado" name="estado">
+                                    <option value="">Selecione o estado</option>
+                                    <option value="AC">Acre</option>
+                                    <option value="AL">Alagoas</option>
+                                    <option value="AP">Amapá</option>
+                                    <option value="AM">Amazonas</option>
+                                    <option value="BA">Bahia</option>
+                                    <option value="CE">Ceará</option>
+                                    <option value="DF">Distrito Federal</option>
+                                    <option value="ES">Espírito Santo</option>
+                                    <option value="GO">Goiás</option>
+                                    <option value="MA">Maranhão</option>
+                                    <option value="MT">Mato Grosso</option>
+                                    <option value="MS">Mato Grosso do Sul</option>
+                                    <option value="MG">Minas Gerais</option>
+                                    <option value="PA">Pará</option>
+                                    <option value="PB">Paraíba</option>
+                                    <option value="PR">Paraná</option>
+                                    <option value="PE">Pernambuco</option>
+                                    <option value="PI">Piauí</option>
+                                    <option value="RJ">Rio de Janeiro</option>
+                                    <option value="RN">Rio Grande do Norte</option>
+                                    <option value="RS">Rio Grande do Sul</option>
+                                    <option value="RO">Rondônia</option>
+                                    <option value="RR">Roraima</option>
+                                    <option value="SC">Santa Catarina</option>
+                                    <option value="SP">São Paulo</option>
+                                    <option value="SE">Sergipe</option>
+                                    <option value="TO">Tocantins</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="ponto_referencia">Ponto de Referência</label>
+                            <input type="text" id="ponto_referencia" name="ponto_referencia" maxlength="50" placeholder="Ex: Próximo ao shopping, em frente à escola...">
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="button" class="cancel-btn" onclick="cancelNewAddress()">Cancelar</button>
+                            <button type="submit" class="save-btn">Salvar Endereço</button>
+                        </div>
+                    </form>
+                </div>
+    
+
+                <div class="section">
+                    <h2>Forma de Pagamento</h2>
+                    
+                    <div class="payment-options">
+                        <div class="payment-option" onclick="selectPayment('vista')">
+                            <input type="radio" name="payment" value="vista" id="vista">
+                            <div class="payment-header">
+                                <div class="payment-icon">💳</div>
+                                <div class="payment-title">À Vista</div>
+                            </div>
+                            <div class="payment-description">
+                                Pagamento em dinheiro, PIX ou cartão de débito
+                            </div>
+                        </div>
+
+                        <div class="payment-option" onclick="selectPayment('prazo')">
+                            <input type="radio" name="payment" value="prazo" id="prazo">
+                            <div class="payment-header">
+                                <div class="payment-icon">📅</div>
+                                <div class="payment-title">Cartão de Crédito</div>
+                            </div>
+                            <div class="payment-description">
+                                Parcelamento em até 12x no cartão de crédito
+                            </div>
+                            <div class="installments">
+                                <label for="parcelas">Número de parcelas:</label>
+                                <select id="parcelas" name="parcelas">
+                                    <option value="1">1x sem juros</option>
+                                    <option value="2">2x sem juros</option>
+                                    <option value="3">3x sem juros</option>
+                                    <option value="4">4x sem juros</option>
+                                    <option value="5">5x sem juros</option>
+                                    <option value="6">6x sem juros</option>
+                                    <option value="7">7x com juros</option>
+                                    <option value="8">8x com juros</option>
+                                    <option value="9">9x com juros</option>
+                                    <option value="10">10x com juros</option>
+                                    <option value="11">11x com juros</option>
+                                    <option value="12">12x com juros</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="button" class="submit-btn" onclick="finalizar_produto()">Finalizar Pedido</button>
+                
+                <div class="success-message" id="successMessage">
+                    ✅ Pedido realizado com sucesso! Você receberá uma confirmação em breve.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="{% static "js/finalizar_produto.js" %}"></script>
+</body>
+</html>

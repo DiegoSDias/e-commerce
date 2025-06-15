@@ -185,7 +185,9 @@ document.getElementById("fornecedorForm").addEventListener("submit", async funct
   try {
     const response = await fetch(url, {
       method: method,
-      headers: { "Content-Type": "application/json", "X-CSRFToken": getCSRFToken() },
+      headers: { "Content-Type": "application/json", 
+        "X-CSRFToken": getCSRFToken() 
+      },
       body: JSON.stringify(dados),
     });
 
@@ -251,7 +253,7 @@ async function excluirItem(tipo, id) {
       method: "DELETE",
       headers: {
         "X-CSRFToken": getCSRFToken(),
-      },
+      }
     });
 
     const data = await response.json();

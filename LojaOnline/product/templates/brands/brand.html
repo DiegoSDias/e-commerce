@@ -51,6 +51,29 @@
         </div>
     </div>
 
+    
+    <div id="productModal" class="modal">
+        <div class="modal_content">
+            <div class="modal_header">
+                <div class="modal_title">Detalhes do Produto</div>
+                <button class="close_btn" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal_body">
+                <div class="product_detail_image" id="modalImage">📱</div>
+                <div class="product_detail_info">
+                    <h2 class="product_detail_name" id="modalName"></h2>
+                    <p class="product_detail_description" id="modalDescription"></p>
+                    <div class="product_detail_price" id="modalPrice"></div>
+                </div>
+                <div class="product_actions">
+                    <input type="hidden" id="modalProductId" >
+                    <button class="btn_primary" onclick="buyProduct()">Comprar Agora</button>
+                    <button class="btn_secondary" onclick="addToCart()">Adicionar ao Carrinho</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="{% static "js/brand.js" %}"></script>
 </body>
 </html>

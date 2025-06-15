@@ -32,7 +32,6 @@ window.onload = () => {
         let teste = false;
         formLogin.addEventListener("submit", async function (event) {
             event.preventDefault();
-            console.log("TESTE: ", teste)
             if(teste) return 
             teste = true;
             
@@ -50,7 +49,7 @@ window.onload = () => {
             })
 
             const data = await response.json()
-            console.log("DATA: ", data)
+            
             if(data){
                 window.location.href = menu
             }
@@ -97,7 +96,7 @@ window.onload = () => {
             const data = await response.json();
 
             if (data.sucesso) {
-                window.location.href = menu
+                window.location.href = welcome
             } else {
                 alert(data.erro || "Erro ao cadastrar.");
             }

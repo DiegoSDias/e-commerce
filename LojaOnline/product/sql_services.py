@@ -1,5 +1,6 @@
 from django.db import connection
 from django.http import JsonResponse
+from datetime import datetime, date
 
 def salvar_produto(nome, valor_unitario, descricao, quantEstoque_disponivel, quantEstoque_min, quantEstoque_max, id_categoria, id_marca, id_fornecedor):
     try:
@@ -40,10 +41,11 @@ def salvar_endereco(rua, numero, cep, cidade, estado, complemento, ponto_referen
                            INSERT INTO endereco (rua, numero, cep, cidade, estado, complemento, ponto_referencia)
                            VALUES (%s, %s, %s, %s, %s, %s, %s)
                            """, [rua, numero, cep, cidade, estado, complemento, ponto_referencia])
-            return JsonResponse({'sucesso': 'Erro no servidor'}, status=500)
+            return JsonResponse({'sucesso': True})
     except Exception as e:
         print("Erro ao cadastrar endereço:", e)
         return JsonResponse({'erro': 'Erro no servidor'}, status=500)
+
 
 def salvar_fornecedor(cnpj, nome, email, telefone, endereco):
     try:
@@ -116,4 +118,151 @@ def atualizar_endereco(id, dados):
                 dados["ponto_referencia"],
                 id,
             ],
+        )
+        
+        
+def salvar_endereco_usuario(rua, numero, cep, cidade, estado, complemento, ponto_referencia, cpf_usuario):
+    try:
+        with connection.cursor() as cursor:
+            # Inserir endereço
+            cursor.execute("""
+                INSERT INTO endereco (rua, numero, cep, cidade, estado, complemento, ponto_referencia)
+                VALUES (%s, %s, %s, %s, %s, %s, %s)
+                """, [rua, numero, cep, cidade, estado, complemento, ponto_referencia])
+
+            id_endereco = cursor.lastrowid
+
+            # Relacionar endereço ao usuário
+            cursor.execute("""
+                    INSERT INTO usuario_end (cpf, id_endereco) VALUES (%s, %s)
+                """, [cpf_usuario, id_endereco])
+
+            return JsonResponse({"sucesso": "Endereço cadastrado e relacionado com sucesso"})
+
+        return JsonResponse({"erro": "Método não permitido"}, status=405)
+
+    except Exception as e:
+        print("Erro ao cadastrar e relacionar endereço:", e)
+        return JsonResponse({'erro': 'Erro no servidor'}, status=500)
+    
+    
+def salvar_pedidos(cpf_usuario):
+    try:
+        with connection.cursor() as cursor:
+            # Cria novo pedido
+            cursor.execute("""
+                INSERT INTO pedidos (id_usuario, status_pedido, data_pedido)
+                VALUES (%s, %s, %s)
+            """, [cpf_usuario, 'p', date.today()])
+            
+            id_pedido = cursor.lastrowid
+
+            # Pega o carrinho atual do usuário
+            cursor.execute("""
+                SELECT id_carrinho FROM carrinho WHERE id_usuario = %s
+            """, [cpf_usuario])
+            
+            id_carrinho = cursor.fetchone()
+
+            if not id_carrinho:
+                return JsonResponse({"erro": "Carrinho não encontrado"}, status=404)
+            
+            id_carrinho = id_carrinho[0]
+
+            # Transfere os produtos do carrinho para o pedido
+            cursor.execute("""
+                SELECT id_produto, quant FROM carrinho_produto WHERE id_carrinho = %s
+            """, [id_carrinho])
+            
+            produtos = cursor.fetchall()
+
+            for id_produto, quant in produtos:
+                cursor.execute("""
+                    INSERT INTO prod_pedido (id_produto, id_pedido, quant)
+                    VALUES (%s, %s, %s)
+                """, [id_produto, id_pedido, quant])
+
+            # Limpa o carrinho (ou altera status dele, se preferir manter histórico)
+            cursor.execute("""
+                DELETE FROM carrinho_produto WHERE id_carrinho = %s
+            """, [id_carrinho])
+            
+
+        return JsonResponse({"sucesso": "Pedido finalizado com sucesso"})
+
+    except Exception as e:
+        print("Erro ao finalizar pedido:", e)
+        return JsonResponse({"erro": "Erro no servidor"}, status=500)
+    
+        
+def salvar_carrinho(id_usuario, id_produto):
+    try:
+        data_criacao = datetime.now()
+        
+        with connection.cursor() as cursor:
+
+            # Verificar se já existe um carrinho para esse usuário
+            cursor.execute("""
+                SELECT id_carrinho FROM carrinho
+                WHERE id_usuario = %s
+            """, [id_usuario])
+
+            carrinho_existente = cursor.fetchone()
+
+            if carrinho_existente:
+                id_carrinho = carrinho_existente[0]
+            else:
+                # Se não existir, cria um novo carrinho
+                data_criacao = datetime.now().date()
+                
+                cursor.execute("""
+                    INSERT INTO carrinho (id_usuario, data_criacao)
+                    VALUES (%s, %s)
+                """, [id_usuario, data_criacao])
+                
+                id_carrinho = cursor.lastrowid
+
+            # Verifica se o produto já está no carrinho
+            cursor.execute("""
+                SELECT quant FROM carrinho_produto
+                WHERE id_carrinho = %s AND id_produto = %s
+            """, [id_carrinho, id_produto])
+
+            produto_existente = cursor.fetchone()
+
+            if produto_existente:
+                # Produto já existe no carrinho → atualiza a quantidade
+                nova_quant = produto_existente[0] + 1
+                cursor.execute("""
+                    UPDATE carrinho_produto
+                    SET quant = %s
+                    WHERE id_carrinho = %s AND id_produto = %s
+                """, [nova_quant, id_carrinho, id_produto])
+            else:
+                # Produto ainda não está no carrinho → insere novo
+                cursor.execute("""
+                    INSERT INTO carrinho_produto (id_carrinho, id_produto, quant)
+                    VALUES (%s, %s, %s)
+                """, [id_carrinho, id_produto, 1])
+
+            return JsonResponse({"sucesso": "Carrinho cadastrado e relacionado com sucesso"})
+
+        return JsonResponse({"erro": "Método não permitido"}, status=405)
+
+    except Exception as e:
+        print("Erro ao cadastrar e relacionar endereço:", e)
+        return JsonResponse({'erro': 'Erro no servidor'}, status=500)
+    
+def editar_quant_carrinho(id_carrinho, id_produto, quant):
+     with connection.cursor() as cursor:
+        cursor.execute(
+            "UPDATE carrinho_produto SET quant = %s WHERE id_carrinho = %s AND id_produto = %s",
+            [quant, id_carrinho, id_produto],
+        )
+        
+def remover_item_carrinho(id_carrinho, id_produto):
+    with connection.cursor() as cursor:
+        cursor.execute(
+            "DELETE FROM carrinho_produto WHERE id_carrinho = %s AND id_produto = %s",
+            [id_carrinho, id_produto]
         )

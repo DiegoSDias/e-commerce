@@ -11,9 +11,7 @@ def welcome(request):
 
 
 def login(request):
-    print("ENTROU NA FUNÇÃO LOGIN")
     if request.method == "POST":
-        print("ENTROU No Metodo")
         dados = json.loads(request.body)
         email = dados.get('email')
         senha = dados.get('senha')

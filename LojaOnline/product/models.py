@@ -74,8 +74,6 @@ class Pag_Vista(models.Model):
     id_pagVista = models.IntegerField()  # PK
     metodo_pag = models.CharField(max_length=10)
     tipo = models.CharField(max_length=20)
-    max_parcelas = models.IntegerField()
-    quant_parcelas = models.IntegerField()
 
     class Meta:
         db_table = 'pag_vista'
