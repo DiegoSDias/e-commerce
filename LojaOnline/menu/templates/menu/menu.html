@@ -1,25 +1,23 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Mundo Tech - Sua Loja de Celulares</title>
- 
+
     {% load static %}
-    <link rel="stylesheet" href="{% static "css/menu.css" %}">
-</head>
-<body>
-    
-    {% include "header/header.html" %}
-    
+    <link rel="stylesheet" href="{% static 'css/menu.css' %}" />
+  </head>
+  <body>
+    {% include 'header/header.html' %}
+
     <section class="featured">
-        <div class="featured_content">
-            <h1>Últimos Lançamentos</h1>
-            <p>Descubra os smartphones mais avançados com os melhores preços do mercado</p>
-            <a href="#produtos" class="see_product">Ver Produtos</a>
-        </div>
+      <div class="featured_content">
+        <h1>Novidades Imperdíveis</h1>
+        <p>Os lançamentos mais avançados do mercado com ofertas exclusivas para você aproveitar agora.</p>
+      </div>
     </section>
 
-    <script src="{% static "js/menu.js" %}"></script>
-</body>
+    <script src="{% static 'js/menu.js' %}"></script>
+  </body>
 </html>

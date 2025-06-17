@@ -1,44 +1,43 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Marcas - As melhores opções</title>
-    
-    {% load static %}
-    <link rel="stylesheet" href="{% static "css/brand.css" %}">
-</head>
-<body>
-   
-    {% include "header/header.html" %}
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Acessórios – As melhores opções</title>
 
-    <div class="products_section">
-        <div class="container">
-            <!-- Apple -->
-            <div class="brand_section" data-brand="apple">
-                <div class="brand_header apple_header">
-                    <div class="brand_logo"></div>
-                    <div class="brand_title">Acessórios</div>
-                </div>
-                <div class="products_grid">
-                    <div class="product_card apple_card">
-                        <div class="product_image apple_image"></div>
-                        <h3 class="product_name">Película Cerâmica Privacidade</h3>
-                        <div class="product_specs">
-                            • Mais proteção<br>
-                            • Mais segurança<br>
-                            • Mais durabilidade<br>
-                            • Mais estilo<br>
-                        </div>
-                        <div class="product_price apple_price">R$ 39,90</div>
-                        <button class="buy_btn apple_btn" onclick="buyProduct('iPhone 15 Pro Max')">Comprar</button>
-                    </div>
-                </div>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/accessories.css' %}" />
+  </head>
+  <body>
+    {% include 'header/header.html' %}
+
+    <div class="accessories-products-section">
+      <div class="accessories-container">
+        <!-- Acessórios -->
+        <div class="accessories-section" data-brand="accessories">
+          <div class="accessories-header">
+            <div class="accessories-logo"></div>
+            <div class="accessories-title">Acessórios</div>
+          </div>
+
+          <div class="accessories-grid">
+            <div class="accessory-card">
+              <div class="accessory-image"></div>
+              <h3 class="accessory-name">Película Cerâmica Privacidade</h3>
+              <div class="accessory-specs">
+                • Mais proteção<br />
+                • Mais segurança<br />
+                • Mais durabilidade<br />
+                • Mais estilo<br />
+              </div>
+              <div class="accessory-price">R$ 39,90</div>
+              <button class="accessory-btn" onclick="buyProduct('Película Cerâmica Privacidade')">Comprar</button>
             </div>
+          </div>
         </div>
+      </div>
     </div>
 
-    <script src="{% static "js/brand.js" %}"></script>
-</body>
+    <script src="{% static 'js/accessories.js' %}"></script>
+  </body>
 </html>
-        

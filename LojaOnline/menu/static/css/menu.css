@@ -12,7 +12,7 @@ body {
 }
 
 header {
-  background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+  background: #2a5298;
   color: white;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
 }
@@ -150,12 +150,9 @@ a {
   left: 0;
   width: 100vw;
   height: 100vh;
-  /* ocupa a tela toda */
   background-color: rgba(0, 0, 0, 0.5);
   justify-content: center;
-  /* centraliza horizontal */
   align-items: center;
-  /* centraliza vertical */
   z-index: 1000;
   display: none;
 }
