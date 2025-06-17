@@ -212,13 +212,46 @@ async function editarItem(tipo, id) {
 
 
 async function finalizar_produto() {
-  /*
-  const endereco_selecionado = document.querySelector("input[name='enderecoSelecionado':checked]");
+  
+  let dados = {}
+  const endereco_selecionado = document.querySelector("input[name='enderecoSelecionado']:checked");
+  const vista_prazo = document.querySelector("input[name='payment']:checked");
+  const credito = document.querySelector("input[name='subpayment']:checked");
+  const descricao = document.getElementById("cardType").value;
+  const parcelas = document.getElementById("parcelas").value;
+  const max_parcelas = document.getElementById("parcelas").options.length;
+
   if(!endereco_selecionado) {
     alert("Por favor, selecione um endereço de entrega.");
     return;
-  }*/
+  }
 
+  if(!vista_prazo) {
+    alert("Por favor, selecione um metodo de pagamento.");
+    return;
+  }
+
+  if (credito) {
+    dados = {
+      metodo_pag: vista_prazo.value,
+      tipo: credito.value,
+      id_endereco: endereco_selecionado.value,
+      descricao: descricao,
+      parcelas: parcelas,
+      max_parcelas: max_parcelas
+    }
+  } else {
+    dados = {
+      metodo_pag: vista_prazo.value,
+      tipo: "pix",
+      id_endereco: endereco_selecionado.value,
+      descricao: descricao,
+      parcelas: parcelas,
+      max_parcelas: max_parcelas
+    }
+  }
+  console.log(dados.metodo_pag)
+  
   if (!confirm("Deseja finalizar o pedido?")) return;
 
   try {
@@ -228,7 +261,7 @@ async function finalizar_produto() {
         "Content-Type": "application/json",
         "X-CSRFToken": getCSRFToken(),
       },
-      body: JSON.stringify() // Não precisa passar o productId aqui
+      body: JSON.stringify(dados)
     });
 
     const data = await response.json();
@@ -243,3 +276,52 @@ async function finalizar_produto() {
     alert("Erro de conexão ao finalizar pedido.");
   }
 }
+
+
+ // Seleção de forma de pagamento
+        function selectPayment(type) {
+            // Remove seleção anterior
+            document.querySelectorAll('.payment-option').forEach(option => {
+                option.classList.remove('selected');
+            });
+            
+            // Adiciona seleção atual
+            event.currentTarget.classList.add('selected');
+            document.getElementById(type).checked = true;
+            
+            // Mostra/esconde subopções de prazo
+            const prazoOptions = document.getElementById('prazoOptions');
+            if (type === 'prazo') {
+                prazoOptions.style.display = 'block';
+            } else {
+                prazoOptions.style.display = 'none';
+                // Limpa seleções de subpagamento
+                document.querySelectorAll('.suboption-item').forEach(option => {
+                    option.classList.remove('selected');
+                });
+                document.getElementById('cardOptions').style.display = 'none';
+            }
+        }
+
+        // Seleção de subforma de pagamento
+        function selectSubPayment(type, event) {
+            event.stopPropagation(); // Impede a propagação do evento
+            
+            // Remove seleção anterior das subopções
+            document.querySelectorAll('.suboption-item').forEach(option => {
+                option.classList.remove('selected');
+            });
+            
+            // Adiciona seleção atual
+            event.currentTarget.classList.add('selected');
+            document.getElementById(type).checked = true;
+            
+            // Mostra/esconde opções específicas
+            const cardOptions = document.getElementById('cardOptions');
+            
+            if (type === 'credito') {
+                cardOptions.style.display = 'block';
+            } else if (type === 'boleto') {
+                cardOptions.style.display = 'none';
+            }
+        }

@@ -2,13 +2,7 @@ function getCSRFToken() {
   return document.querySelector("[name=csrfmiddlewaretoken]").value;
 }
 
-function buyProduct(productName) {
-  // Animação do botão
-  event.target.style.transform = "scale(0.95)";
-  setTimeout(() => {
-    event.target.style.transform = "translateY(-2px)";
-  }, 150);
-}
+
 
 window.onload = async () => {
   try {
@@ -16,6 +10,7 @@ window.onload = async () => {
     const data = await response.json();
 
     const produtos = data.resultados;
+    console.log("Produtos: ", produtos)
 
     const productsGrid = document.querySelector(".products_grid");
     productsGrid.innerHTML = "";
@@ -29,7 +24,11 @@ window.onload = async () => {
     xiaomiGrid.innerHTML = "";
 
     produtos.forEach((produto) => {
-      if (produto.nome_categoria == "Telefone") {
+      if (produto.nome_categoria.toUpperCase() == "TELEFONE" ||
+          produto.nome_categoria.toUpperCase() == "TELEFONES" ||
+          produto.nome_categoria.toUpperCase() == "CELULAR" ||
+          produto.nome_categoria.toUpperCase() == "CELULARES"
+      ) {
         // Cria um novo card para cada produto
         const card = document.createElement("div");
         card.classList.add("product_card");
@@ -95,9 +94,6 @@ async function addToCart() {
       },
       body: JSON.stringify({productId})
     })
-
-    
-
 
     alert(`Adicionado ao carrinho: ${currentProduct.nome}`);
     closeModal();

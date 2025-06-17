@@ -134,7 +134,7 @@
                                 <div class="payment-title">À Vista</div>
                             </div>
                             <div class="payment-description">
-                                Pagamento em dinheiro, PIX ou cartão de débito
+                                Pagamento em PIX
                             </div>
                         </div>
 
@@ -142,27 +142,55 @@
                             <input type="radio" name="payment" value="prazo" id="prazo">
                             <div class="payment-header">
                                 <div class="payment-icon">📅</div>
-                                <div class="payment-title">Cartão de Crédito</div>
+                                <div class="payment-title">À Prazo</div>
                             </div>
                             <div class="payment-description">
-                                Parcelamento em até 12x no cartão de crédito
+                                Cartão de crédito
                             </div>
-                            <div class="installments">
-                                <label for="parcelas">Número de parcelas:</label>
-                                <select id="parcelas" name="parcelas">
-                                    <option value="1">1x sem juros</option>
-                                    <option value="2">2x sem juros</option>
-                                    <option value="3">3x sem juros</option>
-                                    <option value="4">4x sem juros</option>
-                                    <option value="5">5x sem juros</option>
-                                    <option value="6">6x sem juros</option>
-                                    <option value="7">7x com juros</option>
-                                    <option value="8">8x com juros</option>
-                                    <option value="9">9x com juros</option>
-                                    <option value="10">10x com juros</option>
-                                    <option value="11">11x com juros</option>
-                                    <option value="12">12x com juros</option>
-                                </select>
+                            
+                            <!-- Subopções de pagamento à prazo -->
+                            <div class="payment-suboptions" id="prazoOptions" style="display: none;">
+                                <div class="suboption-item" onclick="selectSubPayment('credito', event)">
+                                    <input type="radio" name="subpayment" value="cartao credito" id="credito">
+                                    <div class="suboption-header">
+                                        <div class="suboption-icon">💳</div>
+                                        <div class="suboption-title">Cartão de Crédito</div>
+                                    </div>
+                                    <div class="suboption-description">Parcelamento em até 12x</div>
+                                    
+                                    <!-- Opções do cartão de crédito -->
+                                    <div class="card-options" id="cardOptions" style="display: none;">
+                                        <div class="form-group">
+                                            <label for="cardType">Bandeira do cartão:</label>
+                                            <select id="cardType" name="cardType">
+                                                <option value="">Selecione a bandeira</option>
+                                                <option value="visa">Visa</option>
+                                                <option value="mastercard">Mastercard</option>
+                                                <option value="american-express">American Express</option>
+                                                <option value="elo">Elo</option>
+                                                <option value="hipercard">Hipercard</option>
+                                                <option value="dinners">Diners Club</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="parcelas">Número de parcelas:</label>
+                                            <select id="parcelas" name="parcelas">
+                                                <option value="1">1x sem juros</option>
+                                                <option value="2">2x sem juros</option>
+                                                <option value="3">3x sem juros</option>
+                                                <option value="4">4x sem juros</option>
+                                                <option value="5">5x sem juros</option>
+                                                <option value="6">6x sem juros</option>
+                                                <option value="7">7x com juros</option>
+                                                <option value="8">8x com juros</option>
+                                                <option value="9">9x com juros</option>
+                                                <option value="10">10x com juros</option>
+                                                <option value="11">11x com juros</option>
+                                                <option value="12">12x com juros</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

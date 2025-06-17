@@ -1,18 +1,7 @@
-  function comprar(produto, preco) {
-            alert(`🛒 Produto adicionado ao carrinho!\n\n📱 ${produto}\n💰 R$ ${preco}\n\n✅ Continue comprando ou finalize seu pedido pelo WhatsApp!`);
-        }
-
 function getCSRFToken() {
   return document.querySelector("[name=csrfmiddlewaretoken]").value;
 }
 
-function buyProduct(productName) {
-  // Animação do botão
-  event.target.style.transform = "scale(0.95)";
-  setTimeout(() => {
-    event.target.style.transform = "translateY(-2px)";
-  }, 150);
-}
 
 window.onload = async () => {
   try {
@@ -28,7 +17,11 @@ window.onload = async () => {
     acessoriosGrid.innerHTML = "";
     produtos.forEach((produto) => {
 
-    if (produto.nome_categoria == "Acessorios") {
+    if (produto.nome_categoria.toUpperCase() != "TELEFONE" &&
+        produto.nome_categoria.toUpperCase() != "TELEFONES" &&
+        produto.nome_categoria.toUpperCase() != "CELULAR" &&
+        produto.nome_categoria.toUpperCase() != "CELULARES"
+  ) {
         const card = document.createElement("div");
         
         card.classList.add("product_card");
@@ -39,7 +32,7 @@ window.onload = async () => {
                       ${produto.descricao}
                   </div>
                   <div class="product_price">R$${produto.valor_unitario}</div>
-                  <button class="buy_btn apple_btn" onclick="buyProduct('${produto.nome}')">Comprar</button>
+                   <button class="buy_btn apple_btn" onclick="viewProduct('${produto.id_produto}', '${produto.nome}', '${produto.descricao}', '${produto.valor_unitario}')">Ver Produto</button>
               `;
 
         acessoriosGrid.appendChild(card)
@@ -47,5 +40,53 @@ window.onload = async () => {
     });
   } catch (error) {
     console.error("Erro ao carregar os produtos:", error);
+  }
+};
+
+function viewProduct(id, nome, descricao, preco) {
+  currentProduct = { nome, descricao, preco };
+
+  document.getElementById("modalName").textContent = nome;
+  document.getElementById("modalDescription").textContent = descricao;
+  document.getElementById("modalPrice").textContent = `R$ ${preco}`;
+
+  document.getElementById("modalProductId").value = id;
+  document.getElementById("productModal").style.display = "block";
+}
+
+function closeModal() {
+  document.getElementById("productModal").style.display = "none";
+  currentProduct = null;
+}
+
+function buyProduct() {
+  if (currentProduct) {
+   
+    alert(`Comprando: ${currentProduct.nome} por R$ ${currentProduct.preco}`);
+    closeModal();
+  }
+}
+
+async function addToCart() {
+  if (currentProduct) {
+    const productId = document.getElementById("modalProductId").value;
+
+    const response = await fetch(`/product/add_cart/`, {
+      method: "POST",
+      headers: {'Content-Type':'application/json', 
+        "X-CSRFToken": getCSRFToken()
+      },
+      body: JSON.stringify({productId})
+    })
+
+    alert(`Adicionado ao carrinho: ${currentProduct.nome}`);
+    closeModal();
+  }
+}
+
+window.onclick = function (event) {
+  const modal = document.getElementById("productModal");
+  if (event.target == modal) {
+    closeModal();
   }
 };

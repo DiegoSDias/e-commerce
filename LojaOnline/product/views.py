@@ -186,7 +186,7 @@ def listar_end_usuario(request, tipo):
 
 def excluir_endereco(request, id):
     if request.method == "DELETE":
-        
+
         with connection.cursor() as cursor:
             cursor.execute("DELETE FROM usuario_end WHERE id_endereco = %s", [id])
             cursor.execute("DELETE FROM endereco WHERE id_endereco = %s", [id])
@@ -290,7 +290,15 @@ def salvar_pedido(request):
     if not cpf_usuario:
         return JsonResponse({"erro": "Usuário não autenticado"}, status=401)
 
-    salvar_pedidos(cpf_usuario)
+    dados = json.loads(request.body)
+    metodo_pag = dados.get("metodo_pag")
+    tipo = dados.get("tipo")
+    id_endereco = dados.get("id_endereco")
+    descricao = dados.get("descricao"),
+    parcelas = dados.get("parcelas"),
+    max_parcelas = dados.get("max_parcelas")
+    
+    salvar_pedidos(cpf_usuario, id_endereco, metodo_pag, tipo, descricao, parcelas, max_parcelas)
     return JsonResponse({'sucesso': 'Pedido cadastrado com sucesso'})
     
 

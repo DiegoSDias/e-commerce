@@ -1,6 +1,6 @@
 from django.db import connection
 from django.http import JsonResponse
-from datetime import datetime, date
+from datetime import datetime, date, timedelta
 
 def salvar_produto(nome, valor_unitario, descricao, quantEstoque_disponivel, quantEstoque_min, quantEstoque_max, id_categoria, id_marca, id_fornecedor):
     try:
@@ -118,8 +118,7 @@ def atualizar_endereco(id, dados):
                 dados["ponto_referencia"],
                 id,
             ],
-        )
-        
+        )    
         
 def salvar_endereco_usuario(rua, numero, cep, cidade, estado, complemento, ponto_referencia, cpf_usuario):
     try:
@@ -146,7 +145,7 @@ def salvar_endereco_usuario(rua, numero, cep, cidade, estado, complemento, ponto
         return JsonResponse({'erro': 'Erro no servidor'}, status=500)
     
     
-def salvar_pedidos(cpf_usuario):
+def salvar_pedidos(cpf_usuario, id_endereco, metodo_pag, tipo, descricao, parcelas, max_parcelas):
     try:
         with connection.cursor() as cursor:
             # Cria novo pedido
@@ -156,7 +155,15 @@ def salvar_pedidos(cpf_usuario):
             """, [cpf_usuario, 'p', date.today()])
             
             id_pedido = cursor.lastrowid
-
+            
+            data_hoje = date.today() + timedelta(days=1)
+            data_futura = data_hoje + timedelta(days=10)
+            
+            cursor.execute("""
+                           INSERT INTO envio (data_envio, data_prevista_entrega, status_envio, id_pedido, id_endereco)
+                           VALUES (%s, %s, %s, %s, %s)
+                           """, [data_hoje, data_futura, 'en', id_pedido, id_endereco])
+            
             # Pega o carrinho atual do usuário
             cursor.execute("""
                 SELECT id_carrinho FROM carrinho WHERE id_usuario = %s
@@ -187,7 +194,24 @@ def salvar_pedidos(cpf_usuario):
                 DELETE FROM carrinho_produto WHERE id_carrinho = %s
             """, [id_carrinho])
             
+            cursor.execute("""
+                            INSERT INTO metodo_pag (metodo_pag) VALUE (%s)
+                           """, [metodo_pag])
+            
+            if metodo_pag == "vista":
+                cursor.execute("""
+                                INSERT INTO pag_vista (metodo_pag, tipo) VALUES (%s, %s)
+                            """, [metodo_pag, tipo])
+                
+            elif metodo_pag == "prazo":
+                cursor.execute("""
+                                INSERT INTO pag_prazo (metodo_pag, tipo, max_parcelas, quant_parcelas, descricao) VALUES (%s, %s, %s, %s, %s)
+                            """, [metodo_pag, tipo, max_parcelas, parcelas, descricao])
 
+            cursor.execute("""
+                                INSERT INTO pagamento (id_pedido, metodo_pag, status_pagamento) VALUES (%s, %s, %s)
+                            """, [id_pedido, metodo_pag, "pg"])
+            
         return JsonResponse({"sucesso": "Pedido finalizado com sucesso"})
 
     except Exception as e:
