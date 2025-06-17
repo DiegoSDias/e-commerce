@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Adicionar Produto</title>
-    
+ 
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/add_product.css' %}">
 </head>
@@ -12,19 +12,7 @@
     <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
 
     <a href="{% url 'menu' %}">Voltar para menu</a>
-    
-    <!-- Navigation Tabs -->
-    <div class="nav-container">
-        <div class="nav-tabs">
-            <button class="nav-tab active" onclick="showForm('produto')">Produto</button>
-            <button class="nav-tab" onclick="showForm('categoria')">Categoria</button>
-            <button class="nav-tab" onclick="showForm('marca')">Marca</button>
-            <button class="nav-tab" onclick="showForm('endereco')">Endereço</button>
-            <button class="nav-tab" onclick="showForm('fornecedor')">Fornecedor</button>
-        </div>
-    </div>
-    
-    <div class="container" id="container-produto">
+    <div class="container">
         <div id="formProduto">
             <h3 id="produtoTitle">Adicionar Produto</h3>
             <form id="produtoForm">
@@ -78,7 +66,7 @@
         </div>
     </div>
 
-    <div class="container" id="container-categoria" style="display: none;">
+    <div class="container">
         <div id="formProduto">
             <h3 id="categoriaTitle">Adicionar Categoria</h3>
             <form id="categoriaForm">
@@ -91,7 +79,7 @@
         </div>
     </div>
 
-    <div class="container" id="container-marca" style="display: none;">
+    <div class="container">
         <div id="formProduto">
             <h3 id="marcaTitle">Adicionar Marca</h3>
             <form id="marcaForm">
@@ -104,55 +92,32 @@
         </div>
     </div>
     
-    <div class="container" id="container-endereco" style="display: none;">
+    <div class="container">
         <div id="formProduto">
             <h3 id="enderecoTitle">Adicionar Endereço</h3>
             <form id="enderecoForm">
-                <div class="input_group">
-                    <input type="text" id="rua" placeholder="Nome da rua" required>
-                </div>
-                <div class="input_group">
-                    <input type="text" id="num_casa" placeholder="Número da casa" required>
-                </div>
-                <div class="input_group">
-                    <input type="text" id="cep" placeholder="cep" required>
-                </div>
-                <div class="input_group">
-                    <input type="text" id="cidade" placeholder="Cidade" required>
-                </div>
-                <div class="input_group">
-                    <input type="text" id="estado" placeholder="Estado EX:(MG)" required>
-                </div>
-                <div class="input_group">
-                    <input type="text" id="complemento" placeholder="Complemento EX:(Apto. 101)" required>
-                </div>
-                <div class="input_group">
-                    <input type="text" id="ponto_referencia" placeholder="Ponto de Referência">
-                </div>
+                <input type="text" id="rua" placeholder="Nome da rua" required>
+                <input type="text" id="num_casa" placeholder="Número da casa" required>
+                <input type="text" id="cep" placeholder="cep" required>
+                <input type="text" id="cidade" placeholder="Cidade" required>
+                <input type="text" id="estado" placeholder="Estado EX:(MG)" required>
+                <input type="text" id="complemento" placeholder="Complemento EX:(Apto. 101)" required>
+                <input type="text" id="ponto_referencia" placeholder="Ponto de Referência" required>
                 <button id="enderecoSubmitBtn" type="submit">Salvar Endereço</button>
                 <button type="button" onclick="mostrarOpcoes('endereco')">Ver Endereços</button>
             </form>
         </div>
     </div>
 
-    <div class="container" id="container-fornecedor" style="display: none;">
+    <div class="container">
         <div id="formProduto">
             <h3 id="fornecedorTitle">Adicionar Fornecedor</h3>
             <form id="fornecedorForm">
-                <div class="input_group">
-                    <input type="text" id="cnpj" placeholder="CNPJ" required>
-                </div>
-                <div class="input_group">
-                    <input type="text" id="nome_fornecedor" placeholder="Nome" required>
-                </div>
-                <div class="input_group">
-                    <input type="email" id="email_fornecedor" placeholder="Email" required>
-                </div>
-                <div class="input_group">
-                    <input type="text" id="telefone_fornecedor" placeholder="Telefone" required>
-                </div>
-                <div class="input_group">
-                    <label>Endereço:</label>
+                <input type="text" id="cnpj" placeholder="CNPJ" required>
+                <input type="text" id="nome_fornecedor" placeholder="Nome" required>
+                <input type="email" id="email_fornecedor" placeholder="Email" required>
+                <input type="text" id="telefone_fornecedor" placeholder="Telefone" required>
+            <label>Endereço:</label>
                     <select id="id_endereco" required>
                         {% for endereco in enderecos %}
                             <option value="{{ endereco.0 }}">
@@ -160,7 +125,6 @@
                             </option>
                         {% endfor %}
                     </select>
-                </div>
                 <button id="fornecedorSubmitBtn" type="submit">Salvar Fornecedor</button>
                 <button type="button" onclick="mostrarOpcoes('fornecedor')">Ver Fornecedores</button>
             </form>

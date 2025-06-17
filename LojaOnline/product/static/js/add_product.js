@@ -2,6 +2,31 @@ function getCSRFToken() {
   return document.querySelector("[name=csrfmiddlewaretoken]").value;
 }
 
+function showForm(formType) {
+  // Ocultar todos os containers
+  const containers = ["produto", "categoria", "marca", "endereco", "fornecedor"];
+  containers.forEach((container) => {
+    const element = document.getElementById("container-" + container);
+    if (element) {
+      element.style.display = "none";
+    }
+  });
+
+  // Remover classe active de todos os botões
+  const tabs = document.querySelectorAll(".nav-tab");
+  tabs.forEach((tab) => {
+    tab.classList.remove("active");
+  });
+
+  // Mostrar o container selecionado
+  const selectedContainer = document.getElementById("container-" + formType);
+  if (selectedContainer) {
+    selectedContainer.style.display = "block";
+  }
+
+  // Adicionar classe active ao botão clicado
+  event.target.classList.add("active");
+}
 
 document.getElementById("produtoForm").addEventListener("submit", async function (event) {
   event.preventDefault();
@@ -85,7 +110,6 @@ document.getElementById("categoriaForm").addEventListener("submit", async functi
     alert("Erro de conexão");
   }
 });
-
 
 document.getElementById("marcaForm").addEventListener("submit", async function (event) {
   event.preventDefault();
@@ -185,9 +209,7 @@ document.getElementById("fornecedorForm").addEventListener("submit", async funct
   try {
     const response = await fetch(url, {
       method: method,
-      headers: { "Content-Type": "application/json", 
-        "X-CSRFToken": getCSRFToken() 
-      },
+      headers: { "Content-Type": "application/json", "X-CSRFToken": getCSRFToken() },
       body: JSON.stringify(dados),
     });
 
@@ -223,7 +245,6 @@ async function mostrarOpcoes(tipo) {
     if (data.resultados && data.resultados.length > 0) {
       conteudo += "<ul>";
       data.resultados.forEach((item) => {
-        
         conteudo += `<li>
                       ${item.nome}
                       <button type="button" onclick="excluirItem('${tipo}', '${item.id}')">Excluir</button>
@@ -244,7 +265,6 @@ async function mostrarOpcoes(tipo) {
   }
 }
 
-
 async function excluirItem(tipo, id) {
   if (!confirm("Tem certeza que deseja excluir?")) return;
 
@@ -253,7 +273,7 @@ async function excluirItem(tipo, id) {
       method: "DELETE",
       headers: {
         "X-CSRFToken": getCSRFToken(),
-      }
+      },
     });
 
     const data = await response.json();

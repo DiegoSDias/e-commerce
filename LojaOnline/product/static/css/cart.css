@@ -139,7 +139,26 @@ h1 {
 }
 
 a {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  background: rgba(210, 210, 210, 0.9);
+  color: #1e3c72;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
   text-decoration: none;
+  font-weight: 500;
+  font-size: 0.9rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+  z-index: 1000;
+  backdrop-filter: blur(10px);
+}
+
+a:hover {
+  background: white;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
 }
 
 .add_item {
